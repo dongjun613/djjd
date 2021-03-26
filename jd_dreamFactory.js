@@ -1293,7 +1293,7 @@ function readShareCode() {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = ['JxNUlonbQxOi3CfFJi9Kgw==@iwGMMCBHj4Ur9qoOq8giHg==@JxNUlonbQxOi3CfFJi9Kgw==@iwGMMCBHj4Ur9qoOq8giHg=='];
+    $.newShareCodes = [];
     if ($.shareCodesArr[$.index - 1]) {
       $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
     } else {
