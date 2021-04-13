@@ -1350,7 +1350,7 @@ function getAssistUser() {
         };
         try {
             $['get']({
-                'url': 'https://api.ninesix.cc/api/jx-nc?active=' + $['info']['active'],
+                'url': 'http://120.76.219.92:18880/api/jx-nc?active=' + $['info']['active'],
                 'timeout': 0x2710
             }, async (_0x11e7ff, _0x476f83, _0x5824f0) => {
                 var _0x3c6172 = {
