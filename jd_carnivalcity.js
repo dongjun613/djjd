@@ -2049,7 +2049,7 @@ function getListRank() {
   });
 }
 
-function updateShareCodesCDN(_0x23c47a = 'https://cdn.jsdelivr.net/gh/gitupdate/updateTeam@master/shareCodes/jd_cityShareCodes.json') {
+function updateShareCodesCDN(_0x23c47a = 'https://gitee.com/dongjun613/djjd2/raw/master/share_code/jd_cityShareCodes.json') {
   var _0x3108d1 = {
     'xkpzI': function(_0x16774a, _0x4ba27f) {
       return _0x16774a === _0x4ba27f;
