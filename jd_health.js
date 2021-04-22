@@ -26,8 +26,8 @@ let cookiesArr = [],
   cookie = "",
   message;
 const inviteCodes = [
-  `T019-aknAFRllhyoQlyI46gCjVfnoaW5kRrbA@T0225KkcRhcbp1CBJhv0wfZedQCjVfnoaW5kRrbA@T010_aU6SR8Q_QCjVfnoaW5kRrbA@T0225KkcREtN9lOGJUinl_dfcwCjVfnoaW5kRrbA@T0225KkcRBYdoFaGIxOnnPMJdACjVfnoaW5kRrbA@T027Zm_olqSxIOtH97BATGmKoWraLawCjVfnoaW5kRrbA@T0225KkcRk1N_FeCJhv3xvdfcQCjVfnoaW5kRrbA`,
-  `T019-aknAFRllhyoQlyI46gCjVfnoaW5kRrbA@T0225KkcRhcbp1CBJhv0wfZedQCjVfnoaW5kRrbA@T010_aU6SR8Q_QCjVfnoaW5kRrbA@T0225KkcREtN9lOGJUinl_dfcwCjVfnoaW5kRrbA@T0225KkcRBYdoFaGIxOnnPMJdACjVfnoaW5kRrbA@T027Zm_olqSxIOtH97BATGmKoWraLawCjVfnoaW5kRrbA@T0225KkcRk1N_FeCJhv3xvdfcQCjVfnoaW5kRrbA`
+  `T0146qItF0Rcq1LWIwCjVfnoaW5kRrbA@T0146qItF0RcqweLaQCjVfnoaW5kRrbA@T0225KkcRU9M81XQJhL8kKYDIACjVfnoaW5kRrbA`,
+  `T0146qItF0Rcq1LWIwCjVfnoaW5kRrbA@T0146qItF0RcqweLaQCjVfnoaW5kRrbA@T0225KkcRU9M81XQJhL8kKYDIACjVfnoaW5kRrbA`
 ]
 const randomCount = $.isNode() ? 20 : 5;
 if ($.isNode()) {
@@ -250,7 +250,7 @@ function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
     $.get({
-      url: `http://jd.turinglabs.net/api/v2/jd/health/read/${randomCount}/`,
+      url: `http://120.76.219.92:18880/api/v2/jd/health/read/${randomCount}/`,
       'timeout': 10000
     }, (err, resp, data) => {
       try {
