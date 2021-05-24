@@ -117,6 +117,7 @@ function getTaskList() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
+            console.log(`${JSON.stringify(data)}`)
             if(data.retCode ===0){
               for (task of data.data.tasks) {
                 if(task.taskState===1){
