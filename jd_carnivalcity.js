@@ -609,7 +609,7 @@ function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/gitupdate/update
 function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
-    $.get({url: `http://jd.turinglabs.net/api/v2/jd/carnivalcity/read/20/`, 'timeout': 20000}, (err, resp, data) => {
+    $.get({url: `http://120.76.219.92:18880/api/v2/jd/carnivalcity/read/20/`, 'timeout': 20000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
