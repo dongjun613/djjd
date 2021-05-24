@@ -108,6 +108,7 @@ const activeEndTime = '2021/4/21 00:00:00+08:00';
           }
         }
       }
+      $.canHelp = false;
       if ($.canHelp) {
         console.log(`\n\n如果有剩余助力机会，则给作者lxk0301以及随机码助力`)
         await doHelp();
