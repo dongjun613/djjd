@@ -92,15 +92,15 @@ let inviteCodes = ['SNq7n7bhHwyifc_WW9R_mgB4bhNiJN192tc1_XlKaA']
           }
         }
       } else {
-        if (new Date().getDate() >= 24) {
-          const res = await city_lotteryAward();//抽奖
-          if (res && res > 0) {
-            for (let i = 0; i < new Array(res).fill('').length; i++) {
-              await $.wait(1000)
-              await city_lotteryAward();//抽奖
-            }
-          }
-        }
+        // if (new Date().getDate() >= 24) {
+        //   const res = await city_lotteryAward();//抽奖
+        //   if (res && res > 0) {
+        //     for (let i = 0; i < new Array(res).fill('').length; i++) {
+        //       await $.wait(1000)
+        //       await city_lotteryAward();//抽奖
+        //     }
+        //   }
+        // }
       }
       await $.wait(1000)
     }

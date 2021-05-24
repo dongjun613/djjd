@@ -53,7 +53,7 @@ if ($.isNode()) {
 }
 let inviteCodes = [];
 const JD_API_HOST = 'https://carnivalcity.m.jd.com';
-const activeEndTime = '2021/4/21 00:00:00+08:00';
+const activeEndTime = '2021/06/20 00:00:00+08:00';
 !(async () => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -108,7 +108,6 @@ const activeEndTime = '2021/4/21 00:00:00+08:00';
           }
         }
       }
-      $.canHelp = false;
       if ($.canHelp) {
         console.log(`\n\n如果有剩余助力机会，则给作者lxk0301以及随机码助力`)
         await doHelp();
@@ -152,10 +151,10 @@ async function JD818() {
 }
 async function doHotProducttask() {
   $.hotProductList = $.hotProductList.filter(v => !!v && v['status'] === "1");
-  if ($.hotProductList && $.hotProductList.length) console.log(`开始 【浏览热销手机产品】任务`)
+  if ($.hotProductList && $.hotProductList.length) console.log(`开始 【浏览热销手机产品】任务,需等待6秒`)
   for (let item of $.hotProductList) {
     await doBrowse(item['id'], "", "hot", "browse", "browseHotSku");
-    await $.wait(200);
+    await $.wait(1000 * 6);
     if ($.browseId) {
       await getBrowsePrize($.browseId)
     }
@@ -243,7 +242,7 @@ function brandTaskInfo(brandId) {
               console.log(`\n开始做 品牌手机 【${data['data']['brandName']}】 任务`)
               console.log(`开始浏览 1-F 单品区 任务 ${sku['name']}`);
               await doBrowse(sku['id'], brandId, "brand", "presell", "browseSku");
-              await $.wait(200);
+              await $.wait(1000 * 6);
               if ($.browseId) await getBrowsePrize($.browseId, brandId);
             }
             for (let sku of $.shopTask.filter(vo => !!vo && vo['status'] !== '4')){
