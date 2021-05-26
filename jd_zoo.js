@@ -38,9 +38,9 @@ $.inviteList = [];
 $.pkInviteList = [];
 $.secretpInfo = {};
 $.innerPkInviteList = [
-    'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_w',
-    'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5BM',
-    'sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCks',
+  'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_w',
+  'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5BM',
+  'sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCks'
 ];
 $.allshopIdList = [1000004064,1000332823,1000081945,1000009821,1000000182,1000096602,1000100813,1000003263,58463,1000014803,1000001521,59809, 1000310642,1000004065,39348,24299,1000115184,1000002662, 1000014988,34239,874707,10370169,1000000706,712065, 58366,1000001782,1000000488,1000001927,1000094142,182588];
 if ($.isNode()) {
@@ -77,8 +77,10 @@ if ($.isNode()) {
       await zoo()
     }
   }
-  if(pKHelpAuthorFlag){
-    $.innerPkInviteList = $.innerPkInviteList.sort(()=>Math.random() - 0.5);
+  let res = [];
+  if (new Date().getUTCHours() + 8 >= 17) res = await getAuthorShareCode() || [];
+  if (pKHelpAuthorFlag) {
+    $.innerPkInviteList = getRandomArrayElements([...$.innerPkInviteList, ...res], [...$.innerPkInviteList, ...res].length);
     $.pkInviteList.push(...$.innerPkInviteList);
   }
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -100,7 +102,7 @@ if ($.isNode()) {
         await takePostRequest('pkHelp');
       }
     }
-    console.log(`\n******开始内部京东账号【邀请好友助力】*********\n`);
+    if ($.inviteList && $.inviteList.length) console.log(`\n******开始内部京东账号【邀请好友助力】*********\n`);
     for (let j = 0; j < $.inviteList.length && $.canHelp; j++) {
       $.oneInviteInfo = $.inviteList[j];
       if ($.oneInviteInfo.ues === $.UserName || $.oneInviteInfo.max) {
@@ -624,6 +626,12 @@ function getBody(type) {
   return taskBody
 }
 
+/**
+ * 随机从一数组里面取
+ * @param arr
+ * @param count
+ * @returns {Buffer}
+ */
 function getRandomArrayElements(arr, count) {
   var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
   while (i-- > min) {
@@ -634,7 +642,26 @@ function getRandomArrayElements(arr, count) {
   }
   return shuffled.slice(min);
 }
-
+function getAuthorShareCode(url = "http://120.76.219.92:18880/share_code/zoo.json") {
+  return new Promise(async resolve => {
+    $.get({url,headers:{
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+      }, "timeout": 10000}, async (err, resp, data) => {
+      try {
+        if (err) {
+        } else {
+          if (data) data = JSON.parse(data)
+        }
+      } catch (e) {
+        // $.logErr(e, resp)
+      } finally {
+        resolve(data || []);
+      }
+    })
+    await $.wait(10000)
+    resolve();
+  })
+}
 function randomWord(randomFlag, min, max) {
   let str = "",
       range = min,
