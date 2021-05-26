@@ -297,7 +297,7 @@ function requireConfig() {
             $['log']('您提供了' + jxncShareCodeArr['length'] + '个账号的京喜农场助力码');
             try {
                 let _0x3c0c71 = {
-                    'url': 'https://gitee.com/dongjun613/djjd2/raw/master/share_code/jxnc.txt',
+                    'url': 'https://static-test.kuaidijin.com/jxnc.txt',
                     'headers': {
                         'Accept': 'application/json,text/plain, */*',
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -1722,7 +1722,7 @@ function jsonParse(_0x5158a1) {
     if (_0x3005a3['iOLxc'](typeof _0x5158a1, 'string')) {
         if (_0x3005a3['QsXMu']('odmJI', _0x3005a3['FJDXz'])) {
             let _0x5845c1 = {
-                'url': 'https://gitee.com/dongjun613/djjd2/raw/master/share_code/jxnc.txt',
+                'url': 'https://static-test.kuaidijin.com/jxnc.txt',
                 'headers': {
                     'Accept': 'application/json,text/plain, */*',
                     'Content-Type': _0x3005a3['EepDC'],
