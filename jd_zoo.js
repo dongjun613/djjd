@@ -151,8 +151,6 @@ async function zoo() {
     }
     await $.wait(1000);
     await takePostRequest('zoo_getHomeData');
-    $.userInfo =$.homeData.result.homeMainInfo
-    console.log(`\n\n当前分红：${$.userInfo.raiseInfo.redNum}份，当前等级:${$.userInfo.raiseInfo.scoreLevel}\n当前金币${$.userInfo.raiseInfo.remainScore}，下一关需要${$.userInfo.raiseInfo.nextLevelScore - $.userInfo.raiseInfo.curLevelStartScore}\n\n`);
     await $.wait(1000);
     await takePostRequest('zoo_getSignHomeData');
     await $.wait(1000);
@@ -201,7 +199,6 @@ async function zoo() {
             await $.wait(3000);
           }
         }
-        await takePostRequest('zoo_getHomeData');
       }else if ($.oneTask.taskType === 2 && $.oneTask.status === 1){
         console.log(`做任务：${$.oneTask.taskName};等待完成 (实际不会添加到购物车)`);
         $.taskId = $.oneTask.taskId;
@@ -219,8 +216,8 @@ async function zoo() {
           await $.wait(1500);
           needTime --;
         }
-        await takePostRequest('zoo_getHomeData');
       }
+      await takePostRequest('zoo_getHomeData');
       let raiseInfo = $.homeData.result.homeMainInfo.raiseInfo;
       if (Number(raiseInfo.totalScore) > Number(raiseInfo.nextLevelScore) && raiseInfo.buttonStatus === 1) {
         console.log(`满足升级条件，去升级`);
@@ -371,7 +368,7 @@ async function zoo() {
       }
     }
     await $.wait(1000);
-    //await takePostRequest('zoo_pk_getTaskDetail');
+    await takePostRequest('zoo_pk_getTaskDetail');
     let skillList = $.pkHomeData.result.groupInfo.skillList || [];
     //activityStatus === 1未开始，2 已开始
     $.doSkillFlag = true;
@@ -539,6 +536,8 @@ async function dealReturn(type, data) {
           $.homeData = data.data;
           $.secretp = data.data.result.homeMainInfo.secretp;
           $.secretpInfo[$.UserName] = $.secretp;
+          $.userInfo = data.data.result.homeMainInfo
+          console.log(`\n\n当前分红：${$.userInfo.raiseInfo.redNum}份，当前等级:${$.userInfo.raiseInfo.scoreLevel}\n当前金币${$.userInfo.raiseInfo.remainScore}，下一关需要${$.userInfo.raiseInfo.nextLevelScore - $.userInfo.raiseInfo.curLevelStartScore}\n\n`);
         }
       }
       break;
