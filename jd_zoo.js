@@ -38,9 +38,9 @@ $.inviteList = [];
 $.pkInviteList = [];
 $.secretpInfo = {};
 $.innerPkInviteList = [
-  'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_I',
-  'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5B0',
-  'sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCkU'
+  'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_M',
+  'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5Bw',
+  'sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCkQ'
 ];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
