@@ -9,7 +9,7 @@ PK互助：内部账号自行互助(排名靠前账号得到的机会多),多余
 地图任务：已添加，下午2点到5点执行,抽奖已添加(基本都是优惠券)
 金融APP任务：已完成
 活动时间：2021-05-24至2021-06-20
-脚本更新时间：2021-05-27 20:55
+脚本更新时间：2021-05-27 13:30
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ===================quantumultx================
 [task_local]
@@ -36,9 +36,13 @@ let cookiesArr = [];
 $.cookie = '';
 $.inviteList = [
   'ZXTKT0146qItF0Rcq1LWIwFjRWn6-7zx55awQ','ZXTKT0146qItF0RcqweLaQFjRWn6-7zx55awQ','ZXTKT0225KkcRU9M81XQJhL8kKYDIAFjRWn6-7zx55awQ'
+];
+$.pkInviteList = [];
 $.secretpInfo = {};
 $.innerPkInviteList = [
-  'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_I','sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5B0','sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCkU'
+  'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_I',
+  'sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5B0',
+  'sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCkU'
 ];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -128,12 +132,12 @@ if ($.isNode()) {
     }
   }
 })()
-  .catch((e) => {
-    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-  })
-  .finally(() => {
-    $.done();
-  })
+    .catch((e) => {
+      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+    })
+    .finally(() => {
+      $.done();
+    })
 
 async function zoo() {
   try {
@@ -910,8 +914,8 @@ function TotalBean() {
 
 function randomWord(randomFlag, min, max) {
   let str = "",
-    range = min,
-    arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+      range = min,
+      arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   // 随机产生
   if (randomFlag) {
     range = Math.round(Math.random() * (max - min)) + min;
@@ -925,16 +929,16 @@ function randomWord(randomFlag, min, max) {
 
 function minusByByte(t, n) {
   var e = t.length
-    , r = n.length
-    , o = Math.max(e, r)
-    , i = toAscii(t)
-    , a = toAscii(n)
-    , s = ""
-    , u = 0;
+      , r = n.length
+      , o = Math.max(e, r)
+      , i = toAscii(t)
+      , a = toAscii(n)
+      , s = ""
+      , u = 0;
   for (e !== r && (i = add0(i, o),
-    a = this.add0(a, o)); u < o;)
+      a = this.add0(a, o)); u < o;)
     s += Math.abs(i[u] - a[u]),
-      u++;
+        u++;
   return s
 }
 
@@ -942,7 +946,7 @@ function toAscii(t) {
   var n = "";
   for (var e in t) {
     var r = t[e]
-      , o = /[a-zA-Z]/.test(r);
+        , o = /[a-zA-Z]/.test(r);
     if (t.hasOwnProperty(e))
       if (o)
         n += getLastAscii(r);
@@ -970,7 +974,7 @@ function wordsToBytes(t) {
 function bytesToHex(t) {
   for (var n = [], e = 0; e < t.length; e++)
     n.push((t[e] >>> 4).toString(16)),
-      n.push((15 & t[e]).toString(16));
+        n.push((15 & t[e]).toString(16));
   return n.join("")
 }
 
@@ -983,7 +987,7 @@ function stringToBytes(t) {
 
 function bytesToWords(t) {
   for (var n = [], e = 0, r = 0; e < t.length; e++,
-    r += 8)
+      r += 8)
     n[r >>> 5] |= t[e] << 24 - r % 32;
   return n
 }
@@ -991,15 +995,15 @@ function bytesToWords(t) {
 function getSign(t) {
   t = stringToBytes(t)
   var e = bytesToWords(t)
-    , i = 8 * t.length
-    , a = []
-    , s = 1732584193
-    , u = -271733879
-    , c = -1732584194
-    , f = 271733878
-    , h = -1009589776;
+      , i = 8 * t.length
+      , a = []
+      , s = 1732584193
+      , u = -271733879
+      , c = -1732584194
+      , f = 271733878
+      , h = -1009589776;
   e[i >> 5] |= 128 << 24 - i % 32,
-    e[15 + (i + 64 >>> 9 << 4)] = i;
+      e[15 + (i + 64 >>> 9 << 4)] = i;
   for (var l = 0; l < e.length; l += 16) {
     for (var p = s, g = u, v = c, d = f, y = h, m = 0; m < 80; m++) {
       if (m < 16)
@@ -1010,16 +1014,16 @@ function getSign(t) {
       }
       var _ = (s << 5 | s >>> 27) + h + (a[m] >>> 0) + (m < 20 ? 1518500249 + (u & c | ~u & f) : m < 40 ? 1859775393 + (u ^ c ^ f) : m < 60 ? (u & c | u & f | c & f) - 1894007588 : (u ^ c ^ f) - 899497514);
       h = f,
-        f = c,
-        c = u << 30 | u >>> 2,
-        u = s,
-        s = _
+          f = c,
+          c = u << 30 | u >>> 2,
+          u = s,
+          s = _
     }
     s += p,
-      u += g,
-      c += v,
-      f += d,
-      h += y
+        u += g,
+        c += v,
+        f += d,
+        h += y
   }
   return [s, u, c, f, h]
 }
