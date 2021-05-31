@@ -21,7 +21,7 @@ cron "0 15-19/1 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/mast
 const $ = new Env('沸腾之夜');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-$.inviteCodeList = [];
+$.inviteCodeList = [{"inviteCode":"rs1vDLwN_o1WAA","use":"dongjun613","max":false},{"inviteCode":"rs1vDLwN_tgLSg","use":"dongjuncly","max":false},{"inviteCode":"oMZeXrcdpopQBeo5M-F5qw","use":"jd_5ae6176884a9d","max":false}];
 let cookiesArr = [
 ];
 
