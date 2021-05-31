@@ -149,7 +149,7 @@ function dealReturn(type, data) {
                                    'max':false
                               }
                          )
-                         console.log(`inviteCodeList：${$.inviteCodeList}`);
+                         console.log(JSON.stringify($.inviteCodeList));
                     }
                }else{
                     console.log(JSON.stringify(data));
