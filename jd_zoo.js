@@ -14,17 +14,17 @@ PK互助：内部账号自行互助(排名靠前账号得到的机会多),多余
 ===================quantumultx================
 [task_local]
 #618动物联萌
-13 * * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_zoo.js, tag=618动物联萌, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+33 0,6-23/2 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_zoo.js, tag=618动物联萌, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 =====================Loon================
 [Script]
-cron "13 * * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_zoo.js, tag=618动物联萌
+cron "33 0,6-23/2 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_zoo.js, tag=618动物联萌
 
 ====================Surge================
-618动物联萌 = type=cron,cronexp="13 * * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_zoo.js
+618动物联萌 = type=cron,cronexp="33 0,6-23/2 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_zoo.js
 
 ============小火箭=========
-618动物联萌 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_zoo.js, cronexpr="13 * * * *", timeout=3600, enable=true
+618动物联萌 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_zoo.js, cronexpr="33 0,6-23/2 * * *", timeout=3600, enable=true
  */
 const $ = new Env('618动物联萌');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -36,7 +36,7 @@ let cookiesArr = [];
 $.cookie = '';
 $.inviteList = [];
 $.pkInviteList = [
-  'sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCk-U','sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5Bfq','sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_i2',
+  'sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCk-X','sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5Bfp','sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_i1',
 ];
 $.secretpInfo = {};
 $.innerPkInviteList = [
@@ -577,6 +577,7 @@ async function dealReturn(type, data) {
             'inviteId': data.data.result.inviteId,
             'max': false
           });
+          console.log(JSON.stringify($.inviteList));
         }
         $.taskList = data.data.result.taskVos;
       }
