@@ -91,7 +91,7 @@ if ($.isNode()) {
   let res = [], res2 = [], res3 = [];
   res3 = await getAuthorShareCode('http://120.76.219.92:18880/share_code/zoo.json');
   if (!res3) await getAuthorShareCode('http://120.76.219.92:18880/share_code/zoo.json')
-  if (new Date().getHours()>= 17) {
+  if (new Date().getHours()>= 9) {
     res = await getAuthorShareCode() || [];
     res2 = await getAuthorShareCode('http://120.76.219.92:18880/share_code/zoo.json') || [];
   }
