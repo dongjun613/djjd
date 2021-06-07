@@ -97,11 +97,8 @@ if ($.isNode()) {
     res = await getAuthorShareCode() || [];
     res2 = await getAuthorShareCode('http://120.76.219.92:18880/share_code/zoo.json') || [];
   }
-  if (new Date().getHours() === 9 || (new Date().getHours() === 10 && new Date().getMinutes() < 11)) {
-    $.innerPkInviteList.push('sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_iw');
-    $.innerPkInviteList.push('sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5Bfs');
-    $.innerPkInviteList.push('sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCk-S');
-  }
+  // if (new Date().getHours() === 11 || new Date().getHours() === 12 || (new Date().getHours() === 13 && new Date().getMinutes() < 35)) {
+  // }
   if (pKHelpAuthorFlag) {
     $.innerPkInviteList = getRandomArrayElements([...$.innerPkInviteList, ...res, ...res2, ...res3], [...$.innerPkInviteList, ...res, ...res2, ...res3].length);
     $.pkInviteList.push(...$.innerPkInviteList);
