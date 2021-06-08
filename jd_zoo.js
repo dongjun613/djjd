@@ -35,14 +35,11 @@ const pKHelpAuthorFlag = true;//是否助力作者PK  true 助力，false 不助
 let cookiesArr = [];
 $.cookie = '';
 $.inviteList = [{"ues":"dongjun613","secretp":"tD6QUfoouunS5_j01dc","inviteId":"ZXTKT0146qItF0Rcq1LWIwFjRWn6-7zx55awQ","max":false},{"ues":"dongjuncly","secretp":"tD6QUfoouryPrfj01dc","inviteId":"ZXTKT0146qItF0RcqweLaQFjRWn6-7zx55awQ","max":false},{"ues":"jd_5ae6176884a9d","secretp":"ujWhA_E44u7U4rywncrQUDWsNaA","inviteId":"ZXTKT0225KkcRU9M81XQJhL8kKYDIAFjRWn6-7zx55awQ","max":false}];
-$.pkInviteList = [];
 $.pkInviteList = [
-  "sSKNX-MpqKOJsNu8mJ7RA9BJMup4tAAmPcPPPhBUWYKUJ19UKeC8EAoKeUXELi4u","sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5Bfs","sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_iw",
+  "sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_i_","sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5Bfj","sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCk-d",
 ];
 $.secretpInfo = {};
-$.innerPkInviteList = [
-
-];
+$.innerPkInviteList = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -97,8 +94,11 @@ if ($.isNode()) {
     res = await getAuthorShareCode() || [];
     res2 = await getAuthorShareCode('http://120.76.219.92:18880/share_code/zoo.json') || [];
   }
-  // if (new Date().getHours() === 11 || new Date().getHours() === 12 || (new Date().getHours() === 13 && new Date().getMinutes() < 35)) {
-  // }
+  if (new Date().getHours() === 9 ||  (new Date().getHours() === 10 && new Date().getMinutes() < 40)) {
+    $.innerPkInviteList.push('sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_i_');
+    $.innerPkInviteList.push('sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5Bfj');
+    $.innerPkInviteList.push('sSKNX-MpqKOJsNu9yM7fBS7fjEa32a7XKiPzEkkNOknfpv3Ea9H9QTKXv0TpCk-d');
+  }
   if (pKHelpAuthorFlag) {
     $.innerPkInviteList = getRandomArrayElements([...$.innerPkInviteList, ...res, ...res2, ...res3], [...$.innerPkInviteList, ...res, ...res2, ...res3].length);
     $.pkInviteList.push(...$.innerPkInviteList);
