@@ -43,17 +43,6 @@ let cookiesArr = [], cookie = '',secretp = '',shareCodeList = [],showCode = true
 let doPkSkill = true;  //自动放技能，不需要的改为false
 const JD_API_HOST = `https://api.m.jd.com/client.action?functionId=`;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-if ($.isNode()) {
-  Object.keys(jdCookieNode).forEach((item) => {
-    cookiesArr.push(jdCookieNode[item])
-  })
-  if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
-} else {
-  cookiesArr = [
-    $.getdata("CookieJD"),
-    $.getdata("CookieJD2"),
-    ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
-}
 !(async () => {
   await requireConfig()
   if (!cookiesArr[0]) {
