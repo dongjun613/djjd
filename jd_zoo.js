@@ -670,13 +670,13 @@ function zoo_getHomeData(inviteId= "",timeout = 0) {
             if (merge.black) return;
             let date = new Date($.time("yyyy/MM/dd HH:mm:ss"));
             if (date.getHours() >= 9 && date.getHours() < 23) {
-              await zoo_pk_getHomeData('sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4rrjbVoy_mx')
+              await zoo_pk_getHomeData('sSKNX-MpqKOHu-rvw96HV8bVMTRDUbz-qOdOu4q-0P9H5Bbt')
             }
             //await zoo_pk_assistGroup()
             //if (data.data.result.homeMainInfo.raiseInfo.buttonStatus === 1 )
             if ( data.data.result.homeMainInfo.raiseInfo.buttonStatus === 1 && parseInt(data.data.result.homeMainInfo.raiseInfo.totalScore) >= parseInt(data.data.result.homeMainInfo.raiseInfo.nextLevelScore) ) await zoo_raise(1000)
             if (date.getHours() >= 0 && date.getHours() < 1) {
-              await zoo_getHomeData('ZXTKT0146qItF0Rcq1LWIwFjRWn6-7zx55awQ');//ZXTKT0225KkcRBka_FPTJBjzkv9YfAFjRWn6-7zx55awQ
+              await zoo_getHomeData('ZXTKT0146qItF0RcqweLaQFjRWn6-7zx55awQ');//ZXTKT0225KkcRBka_FPTJBjzkv9YfAFjRWn6-7zx55awQ
             }
             await zoo_getTaskDetail()
             await zoo_getTaskDetail("","app")
