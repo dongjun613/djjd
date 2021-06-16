@@ -413,7 +413,7 @@ function zoo_collectProduceScore(timeout = 0){
           data = JSON.parse(data);
           if (data.data.bizCode === -1002) {
             console.log('此账号暂不可使用脚本，脚本终止！')
-            merge.black = false;
+            merge.black = true;
             return ;
           }
           if (data.data.result) console.log(`\n收取金币：${data.data.result.produceScore}`)
