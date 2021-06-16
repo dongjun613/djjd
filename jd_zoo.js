@@ -123,7 +123,7 @@ function zoo_getTaskDetail(shopSign = "",appSign = "",timeout = 0){
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=zoo_getTaskDetail&body={${appSign}"shopSign":"${shopSign}"}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_getTaskDetail&body={${appSign}"shopSign":"${shopSign}"}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       //if (shopSign) {
       //  console.log(shopSign)
@@ -153,8 +153,8 @@ function zoo_getTaskDetail(shopSign = "",appSign = "",timeout = 0){
               for (let k = data.data.result.taskVos[i].times; k < data.data.result.taskVos[i].maxTimes; k++) {
                 for (let j in list) {
                   if (list[j].status === 1) {
-                    //let taskBody = `functionId=zoo_collectScore&body={"taskId":"${data.data.result.taskVos[i].taskId}","actionType":1,"taskToken":"${list[j].taskToken}","ss":"{\\"extraData\\":{\\"log\\":\\"${sign}\\",\\"sceneid\\":\\"DR216hPageh5\\"},\\"secretp\\":\\"${secretp}\\",\\"random\\":\\"${rnd}\\"}"}&client=wh5&clientVersion=1.0.0`
-                    let taskBody = `functionId=zoo_collectScore&body=${JSON.stringify({"taskId": data.data.result.taskVos[i].taskId,"actionType":1,"taskToken" : list[j].taskToken,"ss" : getBody()})}&client=wh5&clientVersion=1.0.0`
+                    //let taskBody = `functionId=zoo_collectScore&body={"taskId":"${data.data.result.taskVos[i].taskId}","actionType":1,"taskToken":"${list[j].taskToken}","ss":"{\\"extraData\\":{\\"log\\":\\"${sign}\\",\\"sceneid\\":\\"DR216hPageh5\\"},\\"secretp\\":\\"${secretp}\\",\\"random\\":\\"${rnd}\\"}"}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
+                    let taskBody = `functionId=zoo_collectScore&body=${JSON.stringify({"taskId": data.data.result.taskVos[i].taskId,"actionType":1,"taskToken" : list[j].taskToken,"ss" : getBody()})}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
                     console.log("\n"+(list[j].title||list[j].shopName||list[j].skuName))
                     await zoo_collectScore(taskBody,2000)
                     //}
@@ -169,7 +169,7 @@ function zoo_getTaskDetail(shopSign = "",appSign = "",timeout = 0){
 
             if ([12,13].includes(data.data.result.taskVos[i].taskType) && data.data.result.taskVos[i].status === 1) {
               for (let k = data.data.result.taskVos[i].times; k < data.data.result.taskVos[i].maxTimes; k++) {
-                let taskBody = `functionId=zoo_collectScore&body=${JSON.stringify({"taskId": data.data.result.taskVos[i].taskId,"taskToken" : list[j].taskToken,"ss" : getBody()})}&client=wh5&clientVersion=1.0.0`
+                let taskBody = `functionId=zoo_collectScore&body=${JSON.stringify({"taskId": data.data.result.taskVos[i].taskId,"taskToken" : list[j].taskToken,"ss" : getBody()})}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
                 if (merge.black)  return ;
                 //if (typeof data.data.result.taskVos[i].simpleRecordInfoVo !== "undefined"){
                 //  taskBody = encodeURIComponent(`{"dataSource":"newshortAward","method":"getTaskAward","reqParams":"{\\"taskToken\\":\\"${data.data.result.taskVos[i].simpleRecordInfoVo.taskToken}\\"}","sdkVersion":"1.0.0","clientLanguage":"zh"}`)
@@ -212,7 +212,7 @@ function zoo_myMap(timeout = 0){
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=zoo_myMap&body={"ss":"{\\"extraData\\":{},\\"businessData\\":{},\\"secretp\\":\\"${secretp}\\"}"}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_myMap&body={"ss":"{\\"extraData\\":{},\\"businessData\\":{},\\"secretp\\":\\"${secretp}\\"}"}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       $.post(url, async (err, resp, data) => {
         try {
@@ -250,7 +250,7 @@ function zoo_pk_doPkSkill(skillType, timeout = 0){
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=zoo_pk_doPkSkill&body={"skillType" : "${skillType}"}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_pk_doPkSkill&body={"skillType" : "${skillType}"}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       $.post(url, async (err, resp, data) => {
         try {
@@ -286,7 +286,7 @@ function zoo_sign(timeout = 0){
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=zoo_sign&body={}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_sign&body={}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       $.post(url, async (err, resp, data) => {
         try {
@@ -327,7 +327,7 @@ function zoo_shopSignInWrite(shopSign,timeout = 0){
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=zoo_shopSignInWrite&body={"shopSign":"${shopSign}","ss":"{\\"extraData\\":{\\"is_trust\\":true,\\"sign\\":\\"${sign}\\",\\"time\\":${time},\\"encrypt\\":\\"3\\",\\"nonstr\\":\\"${nonstr}\\",\\"jj\\":\\"\\",\\"token\\":\\"d89985df35e6a2227fd2e85fe78116d2\\",\\"cf_v\\":\\"1.0.1\\",\\"client_version\\":\\"2.1.3\\",\\"sceneid\\":\\"QD216hPageh5\\"},\\"businessData\\":{\\"taskId\\":\\"${shopSign}\\",\\"rnd\\":\\"${rnd}\\",\\"inviteId\\":\\"-1\\",\\"stealId\\":\\"-1\\"},\\"secretp\\":\\"${secretp}\\"}"}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_shopSignInWrite&body={"shopSign":"${shopSign}","ss":"{\\"extraData\\":{\\"is_trust\\":true,\\"sign\\":\\"${sign}\\",\\"time\\":${time},\\"encrypt\\":\\"3\\",\\"nonstr\\":\\"${nonstr}\\",\\"jj\\":\\"\\",\\"token\\":\\"d89985df35e6a2227fd2e85fe78116d2\\",\\"cf_v\\":\\"1.0.1\\",\\"client_version\\":\\"2.1.3\\",\\"sceneid\\":\\"QD216hPageh5\\"},\\"businessData\\":{\\"taskId\\":\\"${shopSign}\\",\\"rnd\\":\\"${rnd}\\",\\"inviteId\\":\\"-1\\",\\"stealId\\":\\"-1\\"},\\"secretp\\":\\"${secretp}\\"}"}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       $.post(url, async (err, resp, data) => {
         try {
@@ -365,7 +365,7 @@ function zoo_shopSignInRead(shopSign,timeout = 0){
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=zoo_shopSignInRead&client=wh5&clientVersion=1.0.0&body={"shopSign":"${shopSign}"}`
+        body : `functionId=zoo_shopSignInRead&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf&body={"shopSign":"${shopSign}"}`
       }
       $.post(url, async (err, resp, data) => {
         try {
@@ -404,7 +404,7 @@ function zoo_collectProduceScore(timeout = 0){
           'Accept-Language' : `zh-cn`,
           'Content-Type' : `application/x-www-form-urlencoded`
         },
-        body : `functionId=zoo_collectProduceScore&body=${JSON.stringify({"ss" : getBody()})}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_collectProduceScore&body=${JSON.stringify({"ss" : getBody()})}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       //console.log(url.body)
       $.post(url, async (err, resp, data) => {
@@ -532,7 +532,7 @@ function zoo_getFeedDetail(taskId,timeout = 0){
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=zoo_getFeedDetail&body={"taskId":"${taskId}"}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_getFeedDetail&body={"taskId":"${taskId}"}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       //console.log(url)
       $.post(url, async (err, resp, data) => {
@@ -545,8 +545,8 @@ function zoo_getFeedDetail(taskId,timeout = 0){
               for (let j in list[i].productInfoVos) {
                 if (j >= 5)  break;
                 //${JSON.stringify({"ss" : getBody()})}
-                //let taskBody = `functionId=zoo_collectScore&body={"taskId":${list[i].taskId},"taskToken" : "${list[i].productInfoVos[j].taskToken}","ss":"{\\"extraData\\":{\\"log\\":\\"${sign}\\",\\"sceneid\\":\\"QD216hPageh5\\"},\\"secretp\\":\\"${secretp}\\",\\"random\\":\\"${rnd}\\"}","actionType":1}&client=wh5&clientVersion=1.0.0`
-                let taskBody = `functionId=zoo_collectScore&body=${JSON.stringify({"taskId": list[i].taskId,"actionType":1,"taskToken" : list[i].productInfoVos[j].taskToken,"ss" : getBody()})}&client=wh5&clientVersion=1.0.0`
+                //let taskBody = `functionId=zoo_collectScore&body={"taskId":${list[i].taskId},"taskToken" : "${list[i].productInfoVos[j].taskToken}","ss":"{\\"extraData\\":{\\"log\\":\\"${sign}\\",\\"sceneid\\":\\"QD216hPageh5\\"},\\"secretp\\":\\"${secretp}\\",\\"random\\":\\"${rnd}\\"}","actionType":1}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
+                let taskBody = `functionId=zoo_collectScore&body=${JSON.stringify({"taskId": list[i].taskId,"actionType":1,"taskToken" : list[i].productInfoVos[j].taskToken,"ss" : getBody()})}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
                 //console.log(taskBody)
                 console.log(list[i].productInfoVos[j].skuName)
                 await zoo_collectScore(taskBody,1000)
@@ -570,7 +570,7 @@ function qryViewkitCallbackResult(taskBody,timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
       let url = {
-        url : `https://api.m.jd.com/?functionId=qryViewkitCallbackResult&client=wh5&clientVersion=1.0.0&body=${taskBody}&_timestamp=`+Date.now(),
+        url : `https://api.m.jd.com/?functionId=qryViewkitCallbackResult&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf&body=${taskBody}&_timestamp=`+Date.now(),
         headers : {
           'Origin' : `https://bunearth.m.jd.com`,
           'Cookie' : cookie,
@@ -618,7 +618,7 @@ function zoo_pk_assistGroup(inviteId = "",timeout = 0) {
           'Accept-Language' : `zh-cn`,
           'Refer' : `https://bunearth.m.jd.com/babelDiy/Zeus/4SJUHwGdUQYgg94PFzjZZbGZRjDd/index.html?jmddToSmartEntry=login`
         },
-        body : `functionId=zoo_pk_assistGroup&body=${JSON.stringify({"confirmFlag": 1,"inviteId" : inviteId,"ss" : getBody()})}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_pk_assistGroup&body=${JSON.stringify({"confirmFlag": 1,"inviteId" : inviteId,"ss" : getBody()})}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       //console.log(url.body)
       $.post(url, async (err, resp, data) => {
@@ -651,7 +651,7 @@ function zoo_getHomeData(inviteId= "",timeout = 0) {
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=zoo_getHomeData&body={${inviteId ? "\"inviteId\":\"" + inviteId +'\"': ""}}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_getHomeData&body={${inviteId ? "\"inviteId\":\"" + inviteId +'\"': ""}}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       $.post(url, async (err, resp, data) => {
         try {
@@ -660,7 +660,7 @@ function zoo_getHomeData(inviteId= "",timeout = 0) {
           data = JSON.parse(data);
           if (data.code === 0) {
             if (inviteId !== "") {
-              let taskBody = `functionId=zoo_collectScore&body=${JSON.stringify({"taskId": 2,"inviteId":inviteId,"actionType":1,"ss" : getBody()})}&client=wh5&clientVersion=1.0.0`
+              let taskBody = `functionId=zoo_collectScore&body=${JSON.stringify({"taskId": 2,"inviteId":inviteId,"actionType":1,"ss" : getBody()})}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
               await zoo_collectScore(taskBody, 1000)
               return
             }
@@ -708,7 +708,7 @@ function zoo_raise(timeout = 0) {
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=zoo_raise&body={}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_raise&body={}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       $.post(url, async (err, resp, data) => {
         try {
@@ -740,7 +740,7 @@ function qryCompositeMaterials(timeout = 0) {
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=qryCompositeMaterials&body={"qryParam":"[{\\"type\\":\\"advertGroup\\",\\"mapTo\\":\\"viewLogo\\",\\"id\\":\\"05149412\\"},{\\"type\\":\\"advertGroup\\",\\"mapTo\\":\\"bottomLogo\\",\\"id\\":\\"05149413\\"}]","activityId":"2cKMj86srRdhgWcKonfExzK4ZMBy","pageId":"","reqSrc":"","applyKey":"21beast"}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=qryCompositeMaterials&body={"qryParam":"[{\\"type\\":\\"advertGroup\\",\\"mapTo\\":\\"viewLogo\\",\\"id\\":\\"05149412\\"},{\\"type\\":\\"advertGroup\\",\\"mapTo\\":\\"bottomLogo\\",\\"id\\":\\"05149413\\"}]","activityId":"2cKMj86srRdhgWcKonfExzK4ZMBy","pageId":"","reqSrc":"","applyKey":"21beast"}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       $.post(url, async (err, resp, data) => {
         try {
@@ -777,7 +777,7 @@ function zoo_pk_getHomeData(inviteId = "",timeout = 0) {
           'Accept-Encoding' : `gzip, deflate, br`,
           'Accept-Language' : `zh-cn`
         },
-        body : `functionId=zoo_pk_getHomeData&body={}&client=wh5&clientVersion=1.0.0`
+        body : `functionId=zoo_pk_getHomeData&body={}&client=wh5&clientVersion=1.0.0&uuid=ef746bc0663f7ca06cdd1fa724c15451900039cf`
       }
       $.post(url, async (err, resp, data) => {
         try {
