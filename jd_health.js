@@ -258,7 +258,7 @@ function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
     $.get({
-      url: `http://120.76.219.92:18880/api/v2/jd/health/read/${randomCount}/`,
+      url: `http://47.106.222.216:18880/api/v2/jd/health/read/${randomCount}/`,
       'timeout': 10000
     }, (err, resp, data) => {
       try {

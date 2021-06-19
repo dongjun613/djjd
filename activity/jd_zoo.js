@@ -784,7 +784,7 @@ function zoo_pk_getHomeData(inviteId = "",timeout = 0) {
       $.post(url, async (err, resp, data) => {
         try {
           if (inviteId !== "") {
-            await $.getScript("http://120.76.219.92:18880/share_code/zoo.txt").then((text) => (shareCodeList = text ? text.split('\n') : []))
+            await $.getScript("http://47.106.222.216:18880/share_code/zoo.txt").then((text) => (shareCodeList = text ? text.split('\n') : []))
             for (let i in shareCodeList) {
               if (shareCodeList[i]) await zoo_pk_assistGroup(shareCodeList[i]);
             }
@@ -851,7 +851,7 @@ function getToken(timeout = 0){
 function requireConfig() {
   return new Promise(resolve => {
     //Node.js用户请在jdCookie.js处填写京东ck;
-    const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+    const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
     //IOS等用户直接用NobyDa的jd cookie
     if ($.isNode()) {
       Object.keys(jdCookieNode).forEach((item) => {

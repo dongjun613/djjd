@@ -187,7 +187,7 @@ function requireConfig() {
 
     try {
       let options = {
-        "url": `http://120.76.219.92:18880/share_code/jxnc_code.txt`,
+        "url": `http://47.106.222.216:18880/share_code/jxnc_code.txt`,
         "headers": {
           "Accept": "application/json,text/plain, */*",
           "Content-Type": "application/x-www-form-urlencoded",
@@ -527,7 +527,7 @@ function getAssistUser() {
   return new Promise(resolve => {
     try {
       $.get({
-        url: `http://120.76.219.92:18880/api/jx-nc?active=${$.info.active}`,
+        url: `http://47.106.222.216:18880/api/jx-nc?active=${$.info.active}`,
         timeout: 10000
       }, async (err, resp, _data) => {
         try {

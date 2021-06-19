@@ -49,7 +49,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       '助力逻辑：先自己京东账号相互助力，如有剩余助力机会，则助力作者\n' +
       '温馨提示：如提示助力火爆，可尝试寻找京东客服')
   let res = await getAuthorShareCode() || [];
-  let res2 = await getAuthorShareCode('http://120.76.219.92:18880/share_code/jxhb.json') || [];
+  let res2 = await getAuthorShareCode('http://47.106.222.216:18880/share_code/jxhb.json') || [];
   if (res && res.activeId) $.activeId = res.activeId;
   $.authorMyShareIds = [...((res && res.codes) || []), ...res2];
   //开启红包,获取互助码
@@ -243,7 +243,7 @@ function openRedPack(strPin, grade) {
   })
 }
 
-function getAuthorShareCode(url = "http://120.76.219.92:18880/share_code/jxhb.json") {
+function getAuthorShareCode(url = "http://47.106.222.216:18880/share_code/jxhb.json") {
   return new Promise(resolve => {
     const options = {
       url: `${url}?${new Date()}`, "timeout": 10000, headers: {
