@@ -94,7 +94,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
     cookie = cookiesArr[i];
     $.canOpenGrade = true;
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-    const grades = [1, 2, 3, 4, 5, 6];
+    const grades = [1, 2, 3, 4, 5, 6, 7];
     for (let grade of grades) {
       if (!$.canOpenGrade) break;
       if (!$.packetIdArr[i]) continue;
@@ -156,15 +156,11 @@ function getUserInfo() {
           data = JSON.parse(data)
           if (data.iRet === 0) {
             console.log(`获取助力码成功：${data.Data.strUserPin}\n`);
-            if (data.Data['dwCurrentGrade'] >= 6) {
-              console.log(`6个阶梯红包已全部拆完\n`)
-            } else {
-              if (data.Data.strUserPin) {
-                $.packetIdArr.push({
-                  strUserPin: data.Data.strUserPin,
-                  userName: $.UserName
-                })
-              }
+            if (data.Data.strUserPin) {
+              $.packetIdArr.push({
+                strUserPin: data.Data.strUserPin,
+                userName: $.UserName
+              })
             }
           } else {
             console.log(`获取助力码失败：${data.sErrMsg}\n`);
@@ -188,7 +184,7 @@ function enrollFriend(strPin) {
       try {
         if (err) {
           console.log(`\n${$.name}:  API查询请求失败 ‼️‼️`)
-          $.logErr(err);
+          $.log(JSON.stringify(err));
         } else {
           // console.log('助力结果', data)
           data = JSON.parse(data)
