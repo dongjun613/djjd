@@ -159,6 +159,7 @@ function getShareCode(token) {
           'uid': data.body.openid
         })
         console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${shareCodes[$.index-1].uid}\n`);
+        console.log(JSON.stringify(shareCodes));
 
       } catch (e) {
         $.logErr(e, resp)
