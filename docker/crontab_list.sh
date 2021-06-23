@@ -133,8 +133,6 @@
 #东东乐园
 30 7 * * * node /scripts/jd_ddnc_farmpark.js >> /scripts/logs/jd_ddnc_farmpark.log 2>&1
 #东东电竞经理
-15 10 * * * node /scripts/jd_elecsport.js >> /scripts/logs/jd_elecsport.log 2>&1
-#天降红包
-30 7 * * * node /scripts/jd_SplitRedPacket.js >> /scripts/logs/jd_SplitRedPacket.log 2>&1
+0 0-23/2 * * * node /scripts/jd_elecsport.js >> /scripts/logs/jd_EsportsManager.log 2>&1
 #柠檬我是大老板农场
 5 6-18/6 * * * node /scripts/jd_wsdlb.js >> /scripts/logs/jd_wsdlb.log 2>&1
