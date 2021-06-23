@@ -28,7 +28,7 @@
 
 const $ = new Env('东东电竞经理');
 let cookiesArr = [], cookie = '', isBox = false, notify, newShareCodes, allMessage = '';
-let tasks = [], shareCodes = [{"tid":"T0146qItF0Rcq1LWIwCjVfloaS5kRrbA","uid":"5znGW_ukvie4h3uWRBa2ndu9WvBgaZUXwbhp5wwwpwY"},{"tid":"T0146qItF0RcqweLaQCjVfloaS5kRrbA","uid":"9ucSdDnB0ZXBxmUaEuV505QE4Zk5eTs1V8KdxrG57Dw"},{"tid":"T0225KkcRU9M81XQJhL8kKYDIACjVfloaS5kRrbA","uid":"9kBPaH4CbVPBlMPWxWaeh5nlHpbxCU2PWx2OGnt_ccI"}], first = true;
+let tasks = [], shareCodes = [], first = true;
 
 !(async () => {
   await requireConfig();
