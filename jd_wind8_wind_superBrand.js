@@ -200,6 +200,7 @@ function getCode(source, actid) {
                             //  console.log(result)
                             $.inviteenaid = result.encryptAssignmentId
                             codeList[codeList.length] = itemid
+                            console.log(JSON.stringify(codeList));
                             console.log(`获取邀请码成功 ${itemid}`);
                         } else {
                             console.log(data)
