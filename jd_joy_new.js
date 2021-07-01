@@ -7,6 +7,8 @@
  完成度 1%，要用的手动执行，先不加cron了
  默认80，10、20、40、80可选
  export feedNum = 80
+ 默认双人跑
+ export JD_JOY_teamLevel = 2
  */
 
 const $ = new Env("宠汪汪二代目")
@@ -291,28 +293,28 @@ class JDJRValidator {
       }
     }
 
-    console.log('successful: %f\%', (count / n) * 100);
+    // console.log('successful: %f\%', (count / n) * 100);
     console.timeEnd('PuzzleRecognizer');
   }
 
   static jsonp(api, data = {}) {
     return new Promise((resolve, reject) => {
-      try {
-        const fnId = `jsonp_${String(Math.random()).replace('.', '')}`;
-        const extraData = {callback: fnId};
-        const query = new URLSearchParams({...DATA, ...extraData, ...data}).toString();
-        const url = `http://${SERVER}${api}?${query}`;
-        const headers = {
-          'Accept': '*/*',
-          'Accept-Encoding': 'gzip,deflate,br',
-          'Accept-Language': 'zh-CN,en-US',
-          'Connection': 'keep-alive',
-          'Host': SERVER,
-          'Proxy-Connection': 'keep-alive',
-          'Referer': 'https://h5.m.jd.com/babelDiy/Zeus/2wuqXrZrhygTQzYA7VufBEpj4amH/index.html',
-          'User-Agent': UA,
-        };
-        const req = http.get(url, {headers}, (response) => {
+      const fnId = `jsonp_${String(Math.random()).replace('.', '')}`;
+      const extraData = {callback: fnId};
+      const query = new URLSearchParams({...DATA, ...extraData, ...data}).toString();
+      const url = `http://${SERVER}${api}?${query}`;
+      const headers = {
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip,deflate,br',
+        'Accept-Language': 'zh-CN,en-US',
+        'Connection': 'keep-alive',
+        'Host': SERVER,
+        'Proxy-Connection': 'keep-alive',
+        'Referer': 'https://h5.m.jd.com/babelDiy/Zeus/2wuqXrZrhygTQzYA7VufBEpj4amH/index.html',
+        'User-Agent': UA,
+      };
+      const req = http.get(url, {headers}, (response) => {
+        try {
           let res = response;
           if (res.headers['content-encoding'] === 'gzip') {
             const unzipStream = new stream.PassThrough();
@@ -335,23 +337,20 @@ class JDJRValidator {
                 [fnId]: (data) => ctx.data = data,
                 data: {},
               };
-
               vm.createContext(ctx);
               vm.runInContext(rawData, ctx);
-
-              // console.log(ctx.data);
               res.resume();
               resolve(ctx.data);
             } catch (e) {
-              reject(e);
+              console.log('生成验证码必须使用大陆IP')
             }
-          });
-        });
-        req.on('error', reject);
-        req.end();
-      } catch (e) {
-        console.log('环境不支持')
-      }
+          })
+        } catch (e) {
+        }
+      })
+
+      req.on('error', reject);
+      req.end();
     });
   }
 }
@@ -560,21 +559,24 @@ $.post = injectToRequest($.post.bind($))
       message = '';
       subTitle = '';
 
+      await run();
+      // await run('detail/v2');
+
       await feed();
 
       let tasks = await taskList();
 
       for (let tp of tasks.datas) {
         console.log(tp.taskName, tp.receiveStatus)
-        if (tp.taskName === '每日签到' && tp.receiveStatus === 'chance_left')
-          await sign();
+        // if (tp.taskName === '每日签到' && tp.receiveStatus === 'chance_left')
+        //   await sign();
 
         if (tp.receiveStatus === 'unreceive') {
           await award(tp.taskType);
           await $.wait(5000);
         }
         if (tp.taskName === '浏览频道') {
-          for (let i = 0; i < 5; i++) {
+          for (let i = 0; i < 3; i++) {
             console.log(`\t第${i + 1}次浏览频道 检查遗漏`)
             let followChannelList = await getFollowChannels();
             for (let t of followChannelList['datas']) {
@@ -783,25 +785,40 @@ function award(taskType) {
   })
 }
 
-function sign() {
+function run(fn = 'match') {
+  let level = process.env.JD_JOY_teamLevel ? process.env.JD_JOY_teamLevel : 2
   return new Promise(resolve => {
     $.get({
-      url: `https://jdjoy.jd.com/common/pet/sign?reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE&taskType=SignEveryDay`,
+      url: `https://jdjoy.jd.com/common/pet/combat/${fn}?teamLevel=${level}&reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE`,
       headers: {
         'Host': 'jdjoy.jd.com',
-        'accept': '*/*',
-        'content-type': 'application/json',
+        'sec-fetch-mode': 'cors',
         'origin': 'https://h5.m.jd.com',
-        'accept-language': 'zh-cn',
+        'content-type': 'application/json',
+        'accept': '*/*',
+        'x-requested-with': 'com.jingdong.app.mall',
+        'sec-fetch-site': 'same-site',
+        'referer': 'https://h5.m.jd.com/babelDiy/Zeus/2wuqXrZrhygTQzYA7VufBEpj4amH/index.html',
+        'accept-language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
         "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-        'referer': 'https://h5.m.jd.com/',
-        'Content-Type': 'application/json; charset=UTF-8',
         'cookie': cookie
       },
-    }, (err, resp, data) => {
+    }, async (err, resp, data) => {
       try {
+        console.log('赛跑', data)
         data = JSON.parse(data);
-        data.success ? console.log(`\t签到成功！`) : console.log('\t签到失败！', JSON.stringify(data))
+        let race = data.data.petRaceResult
+
+        if (race === 'participate') {
+          console.log('匹配成功！')
+        } else if (race === 'unbegin') {
+          console.log('还未开始！')
+        } else if (race === 'matching') {
+          console.log('正在匹配！')
+          await run()
+        } else {
+          console.log('这是什么！')
+        }
       } catch (e) {
         $.logErr(e);
       } finally {
