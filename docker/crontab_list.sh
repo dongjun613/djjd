@@ -10,6 +10,8 @@
 30 10 29 6 * node /scripts/jd_wind8_wind_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
 #欧洲狂欢
 36 10 * * * node /scripts/jd_wind8_wind_europeancup.js >> /scripts/logs/jd_europeancup.log 2>&1
+#开卡瓜分
+30 16 1 7 * node /scripts/jd_wind5_zooCaptain01.js >> /scripts/logs/jd_wind5_zooCaptain01.log 2>&1
 #超级直播间红包雨(活动时间不定期，出现异常提示请忽略。红包雨期间会正常)
 1,31 0-23/1 * * * node /scripts/jd_live_redrain.js >> /scripts/logs/jd_live_redrain.log 2>&1
 #金榜创造营 活动时间：2021-05-21至2021-12-31
@@ -131,3 +133,13 @@
 0 0-23/2 * * * node /scripts/jd_EsportsManager.js >> /scripts/logs/jd_EsportsManager.log 2>&1
 #柠檬我是大老板农场
 5 6-18/6 * * * node /scripts/jd_wsdlb.js >> /scripts/logs/jd_wsdlb.log 2>&1
+#京东到家果园
+10 0,3,8,11,17 * * * node /scripts/jd_winddj_fruit.js >> /scripts/logs/jd_winddj_fruit.log 2>&1
+#京东到家鲜豆任务
+0 0 */1 * * node /scripts/jd_winddj_bean.js >> /scripts/logs/jd_winddj_bean.log 2>&1
+#京东到家收集水车水滴
+*/5 * * * * node /scripts/jd_winddj_fruit_collectWater.js >> /scripts/logs/jd_winddj_fruit_collectWater.log 2>&1
+#京东到家收集庄园水滴
+*/5 * * * * node /scripts/jd_winddj_getPoints.js >> /scripts/logs/jd_winddj_getPoints.log 2>&1
+#京东到家庄园浇水
+15 0 * * * node /scripts/jd_winddj_plantBeans.js >> /scripts/logs/jd_winddj_plantBeans.log 2>&1
