@@ -124,6 +124,7 @@ async function pasture() {
           'max':false
         }
       );
+      console.log(JSON.stringify($.inviteCodeList));
       for (let i = 0; i < $.homeInfo.petinfo.length; i++) {
         $.onepetInfo = $.homeInfo.petinfo[i];
         $.petidList.push($.onepetInfo.petid);
