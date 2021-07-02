@@ -145,3 +145,5 @@
 15 0 * * * node /scripts/jd_winddj_plantBeans.js >> /scripts/logs/jd_winddj_plantBeans.log 2>&1
 #京东试用
 15 12 * * * node /scripts/jd_wind1_wind_try.js >> /scripts/logs/jd_wind1_wind_try.log 2>&1
+#京东零食街
+15 11 * * * node /scripts/jd_lsj.js >> /scripts/logs/jd_lsj.log 2>&1
