@@ -147,3 +147,7 @@
 15 12 * * * node /scripts/jd_wind1_wind_try.js >> /scripts/logs/jd_wind1_wind_try.log 2>&1
 #京东零食街
 15 11 * * * node /scripts/jd_lsj.js >> /scripts/logs/jd_lsj.log 2>&1
+#柠檬推一推
+0 0 * * * node /scripts/jd_tyt.js >> /scripts/logs/jd_tyt.log 2>&1
+#柠檬全民挖现金
+0 10 * * * node /scripts/jd_wxj.js >> /scripts/logs/jd_wxj.log 2>&1
