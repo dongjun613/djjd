@@ -80,6 +80,7 @@ function info() {
             try {
                 data = data.match(/^\w+\((\{[^()]+\})/)[1]
                 data = JSON.parse(data);
+                console.log(JSON.stringify(data));
                 if( data.errcode == 0 ){
                     console.log(`剩余游戏抽奖次数${data.data.currdaydrawnum}`)
                     $.cs = data.data.currdaydrawnum}
