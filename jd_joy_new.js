@@ -510,12 +510,14 @@ function injectToRequest(fn) {
   return (opts, cb) => {
     fn(opts, async (err, resp, data) => {
       if (err) {
-        console.error('Error: ', err);
+        console.error('Failed to request.');
         return;
       }
+
       if (data.search('验证') > -1) {
         console.log('JDJRValidator trying......');
         const res = await new JDJRValidator().run();
+
         opts.url += `&validate=${res.validate}`;
         fn(opts, cb);
       } else {
