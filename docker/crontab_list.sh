@@ -6,6 +6,8 @@
 ##############短期活动##############
 #京东极速版红包(活动时间：2021-5-5至2021-5-31)
 45 0,23 * * * node /scripts/jd_speed_redpocke.js >> /scripts/logs/jd_speed_redpocke.log 2>&1
+#抢京豆
+0 2 * * * node /scripts/jd_wind_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
 #特物
 30 10 29 6 * node /scripts/jd_wind8_wind_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
 #欧洲狂欢
