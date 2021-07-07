@@ -139,8 +139,6 @@
 10 * * * * node /scripts/jd_jxmc_coin.js >> /scripts/logs/jd_jxmc_coin.log 2>&1
 #东东乐园
 30 7 * * * node /scripts/jd_ddnc_farmpark.js >> /scripts/logs/jd_ddnc_farmpark.log 2>&1
-#东东电竞经理
-0 0-23/2 * * * node /scripts/jd_EsportsManager.js >> /scripts/logs/jd_EsportsManager.log 2>&1
 #柠檬我是大老板农场
 5 6-18/6 * * * node /scripts/jd_wsdlb.js >> /scripts/logs/jd_wsdlb.log 2>&1
 #京东到家果园
