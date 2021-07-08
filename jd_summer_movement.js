@@ -23,7 +23,9 @@ $.cookie = '';
 $.inviteList = [];
 $.secretpInfo = {};
 $.ShInviteList = [];
-$.innerShInviteList = [];
+$.innerShInviteList = [
+    'HcmphLj7H135O92cFtd_muO5NlqAVuhhZy-MjKBBqVF10IwCljzArqDGFy7vLrsDbLs','HcmphLj7H135O93JS51_mm095efwm_sRR6u-_ASX8CHDiykoeJ7evU2dBFfn88llsKM','HcmphLbwLg_yK4WbENI73iJ2plOTC3QNJvwC04-QPhomjzZeJ1-K0EmT0Uwyn57vyzgc9x4xUv9kIQ4iAp9zRQ'
+];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -58,7 +60,7 @@ const UA = $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT :
   }
   // 助力
   let res = [];
-  if (new Date().getUTCHours() + 8 >= 17) res = await getAuthorShareCode() || [];
+  // if (new Date().getUTCHours() + 8 >= 17) res = await getAuthorShareCode() || [];
   if (ShHelpAuthorFlag) {
     $.innerShInviteList = getRandomArrayElements([...$.innerShInviteList, ...res], [...$.innerShInviteList, ...res].length);
     $.ShInviteList.push(...$.innerShInviteList);
