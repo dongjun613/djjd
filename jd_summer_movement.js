@@ -356,6 +356,7 @@ async function dealReturn(type, res) {
             'max': false
           });
         }
+        console.log(JSON.stringify($.inviteList));
         $.taskList = data.data.result && data.data.result.taskVos || [];
       }
       break;
