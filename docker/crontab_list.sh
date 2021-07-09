@@ -15,7 +15,7 @@
 #燃动夏季
 12 9,11,13,15,17 * * * node /scripts/jd_wind9_wind_summer_movement.js >> /scripts/logs/jd_summer_movement.log 2>&1
 #粉丝互动
-1 8 * * * node /scripts/jd_wind8_wind_wxFans.js >> /scripts/logs/jd_wxFans.log 2>&1
+15 11 * * * node /scripts/jd_wind8_wind_wxFans.js >> /scripts/logs/jd_wxFans.log 2>&1
 #开卡瓜分
 30 16 1 7 * node /scripts/jd_wind5_zooCaptain01.js >> /scripts/logs/jd_wind5_zooCaptain01.log 2>&1
 #汪汪乐园养joy
