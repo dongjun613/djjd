@@ -99,13 +99,18 @@ $.shareuuid = "78f56152871248f5bb4a58c50b6f4e3d"
                         await draw()
                     }
                     let exchanges =Math.floor($.foodNum/3000)
-                    console.log(`可兑换 ${exchanges} 次 20京🐶`)
+                    console.log(`可兑换 ${exchanges} 次 50京🐶`) 
                     for(q = 0;q<exchanges && Exchange;q++){
-                    await exchange(14)   
+                    await exchange(14)    //16是100豆
                     }
-                    await getinfo()
-                    if(!Exchange){console.log("你 默认 不兑换东西,请自行进去活动兑换")}
-                    message += `【京东账号${$.index}】${$.nickName || $.UserName}\n${$.cow} 兑换京🐶 ${$.exchange}  ${$.drawresult}\n`
+                    await getinfo()                     
+                    if(!Exchange){console.log("你 默认 不兑换东西,请自行进去活动兑换")}                    
+                    message += `【京东账号${$.index}】${$.nickName || $.UserName}\n${$.cow} 兑换京🐶 ${$.exchange}  ${$.drawresult}\n\n`
+                    if($.index%3===0) 
+                   {
+                  await $.wait(60*1000) 
+                  console.log("休息休息~") 
+                   }                     
                 } else {
                   $.msg($.name, "", "跑不起来了~请自己进去一次牧场")
                 }
@@ -259,6 +264,15 @@ function getMyPin() {
                     console.log(`${JSON.stringify(err)}`)
                     console.log(`${$.name} API请求失败，请检查网路重试`)
                 } else {
+                                    if ($.isNode())
+                        for (let ck of resp['headers']['set-cookie']) {
+                            cookie = `${cookie}; ${ck.split(";")[0]};`
+                        }
+                    else {
+                        for (let ck of resp['headers']['Set-Cookie'].split(',')) {
+                            cookie = `${cookie}; ${ck.split(";")[0]};`
+                        }
+                    }
                     data = JSON.parse(data);
                     if (data.data && data.data.secretPin) {
                         $.pin = data.data.secretPin
