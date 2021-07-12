@@ -20,6 +20,7 @@ const zlib = require('zlib');
 const vm = require('vm');
 const PNG = require('png-js');
 const UA = require('./USER_AGENTS.js').USER_AGENT;
+const fetch = require('node-fetch');
 const fs = require("fs");
 
 
@@ -561,69 +562,9 @@ $.post = injectToRequest($.post.bind($))
       message = '';
       subTitle = '';
 
-      await getFriends();
-
-      await run('detail/v2');
-      await run();
+      //await run('detail/v2');
+      //await run();
       await feed();
-
-      let tasks = await taskList();
-      for (let tp of tasks.datas) {
-        console.log(tp.taskName, tp.receiveStatus)
-
-        if (tp.receiveStatus === 'unreceive') {
-          await award(tp.taskType);
-          await $.wait(3000);
-        }
-        if (tp.taskName === '浏览频道') {
-          for (let i = 0; i < 3; i++) {
-            console.log(`\t第${i + 1}次浏览频道 检查遗漏`)
-            let followChannelList = await getFollowChannels();
-            for (let t of followChannelList['datas']) {
-              if (!t.status) {
-                console.log('┖', t['channelName'])
-                await beforeTask('follow_channel', t.channelId);
-                await doTask(JSON.stringify({"channelId": t.channelId, "taskType": 'FollowChannel'}))
-                await $.wait(3000)
-              }
-            }
-            await $.wait(3000)
-          }
-        }
-        if (tp.taskName === '逛会场') {
-          for (let t of tp.scanMarketList) {
-            if (!t.status) {
-              console.log('┖', t.marketName)
-              await doTask(JSON.stringify({
-                "marketLink": `${t.marketLink || t.marketLinkH5}`,
-                "taskType": "ScanMarket"
-              }))
-              await $.wait(3000)
-            }
-          }
-        }
-        if (tp.taskName === '关注商品') {
-          for (let t of tp.followGoodList) {
-            if (!t.status) {
-              console.log('┖', t.skuName)
-              await beforeTask('follow_good', t.sku)
-              await $.wait(1000)
-              await doTask(`sku=${t.sku}`, 'followGood')
-              await $.wait(3000)
-            }
-          }
-        }
-        if (tp.taskName === '关注店铺') {
-          for (let t of tp.followShops) {
-            if (!t.status) {
-              await beforeTask('follow_shop', t.shopId);
-              await $.wait(1000);
-              await followShop(t.shopId)
-              await $.wait(2000);
-            }
-          }
-        }
-      }
     }
   }
 })()
@@ -754,7 +695,7 @@ function doTask(body, fnId = 'scan') {
 }
 
 function feed() {
-  feedNum = process.env.feedNum ? process.env.feedNum : 80
+  feedNum = process.env.feedNum ? process.env.feedNum : 20
   return new Promise(resolve => {
     $.post({
       url: `https://jdjoy.jd.com/common/pet/enterRoom/h5?invitePin=&reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE`,
@@ -857,6 +798,7 @@ function run(fn = 'match') {
         if (fn === 'receive') {
           console.log('领取赛跑奖励：', data)
         } else {
+          console.log('赛跑', data)
           data = JSON.parse(data);
           let race = data.data.petRaceResult
           if (race === 'participate') {
@@ -870,10 +812,8 @@ function run(fn = 'match') {
           } else if (race === 'unreceive') {
             console.log('开始领奖')
             await run('receive')
-          } else if (race === 'time_over') {
-            console.log('不在比赛时间')
           } else {
-            console.log('这是什么！', data)
+            console.log('这是什么！')
           }
         }
       } catch (e) {
@@ -881,69 +821,6 @@ function run(fn = 'match') {
       } finally {
         resolve();
       }
-    })
-  })
-}
-
-function getFriends() {
-  return new Promise((resolve) => {
-    $.post({
-      url: 'https://jdjoy.jd.com/common/pet/enterRoom/h5?invitePin=&reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE',
-      headers: {
-        'Host': 'jdjoy.jd.com',
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'com.jingdong.app.mall',
-        'Referer': 'https://h5.m.jd.com/babelDiy/Zeus/2wuqXrZrhygTQzYA7VufBEpj4amH/index.html?babelChannel=ttt12&sid=445902658831621c5acf782ec27ce21w&un_area=12_904_3373_62101',
-        'Origin': 'https://h5.m.jd.com',
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-        'Cookie': cookie
-      },
-      body: JSON.stringify({})
-    }, async (err, resp, data) => {
-      await $.wait(1000)
-      $.get({
-        url: 'https://jdjoy.jd.com/common/pet/h5/getFriends?itemsPerPage=20&currentPage=1&reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE',
-        headers: {
-          'Host': 'jdjoy.jd.com',
-          'Accept': '*/*',
-          'Referer': 'https://h5.m.jd.com/babelDiy/Zeus/2wuqXrZrhygTQzYA7VufBEpj4amH/index.html',
-          "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-          'cookie': cookie
-        }
-      }, async (err, resp, data) => {
-        data = JSON.parse(data)
-        for (let f of data.datas) {
-          if (f.stealStatus === 'can_steal') {
-            console.log('可偷:', f.friendPin)
-            $.get({
-              url: `https://jdjoy.jd.com/common/pet/enterFriendRoom?reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE&friendPin=${encodeURIComponent(f.friendPin)}`,
-              headers: {
-                'Host': 'jdjoy.jd.com',
-                'Accept': '*/*',
-                'Referer': 'https://h5.m.jd.com/babelDiy/Zeus/2wuqXrZrhygTQzYA7VufBEpj4amH/index.html',
-                "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-                'cookie': cookie
-              }
-            }, (err, resp, data) => {
-              $.get({
-                url: `https://jdjoy.jd.com/common/pet/getRandomFood?reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE&friendPin=${encodeURIComponent(f.friendPin)}`,
-                headers: {
-                  'Host': 'jdjoy.jd.com',
-                  'Accept': '*/*',
-                  'Referer': 'https://h5.m.jd.com/babelDiy/Zeus/2wuqXrZrhygTQzYA7VufBEpj4amH/index.html',
-                  "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-                  'cookie': cookie
-                }
-              }, (err, resp, data) => {
-                data = JSON.parse(data)
-                console.log('偷狗粮:', data.errorCode, data.data)
-              })
-            })
-          }
-          await $.wait(1500)
-        }
-        resolve();
-      })
     })
   })
 }
