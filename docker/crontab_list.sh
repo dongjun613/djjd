@@ -38,6 +38,14 @@
 30 1,6,12,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 #省钱大赢家之翻翻乐
 10,40 * * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
+#早起福利
+30 6 * * * node /scripts/jd_wind_goodMorning.js >> /scripts/logs/jd_goodMorning.log 2>&1
+#运动会
+1 10 * * * node /scripts/jd_wind_olympicgames.js >> /scripts/logs/jd_wind_olympicgames.log 2>&1
+#QQ星系牧场
+7 0-23/3 * * * node /scripts/jd_wind_qqxing.js >> /scripts/logs/jd_wind_qqxing.log 2>&1
+#半点红包雨
+30 0-23/1 * * * node /scripts/jd_wind2_long_half_redrain.js >> /scripts/logs/jd_wind2_long_half_redrain.log 2>&1
 ##############长期活动##############
 # 签到
 7 0,17 * * * cd /scripts && node jd_bean_sign.js >> /scripts/logs/jd_bean_sign.log 2>&1
