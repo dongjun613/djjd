@@ -39,7 +39,7 @@ const ShHelpAuthorFlag = true;//是否助力作者SH  true 助力，false 不助
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [];
 $.cookie = '';
-$.inviteList = [];
+$.inviteList = [{"ues":"dongjun613","inviteId":"HcmphLj7H135O92cFtd_muO5NlqAVuhhZy-MjKBBqVF10IwCljzArqDGFy7vLrsDbLs","max":false},{"ues":"dongjuncly","inviteId":"HcmphLj7H135O93JS51_mm095efwm_sRR6u-_ASX8CHDiykoeJ7evU2dBFfn88llsKM","max":false},{"ues":"jd_5ae6176884a9d","inviteId":"HcmphLbwLg_yK4WbENI73iJ2plOTC3QNJvwC04-QPhomjzZeJ1-K0EmT0Uwyn57vyzgc9x4xUv9kIQ4iAp9zRQ","max":false}];
 $.secretpInfo = {};
 $.ShInviteList = [];
 $.innerShInviteList = [
