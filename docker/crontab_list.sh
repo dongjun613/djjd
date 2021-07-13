@@ -149,7 +149,7 @@
 # 领金贴
 5 0 * * * node /scripts/jd_jin_tie.js >> /scripts/logs/jd_jin_tie.log 2>&1
 #京喜牧场
-15 0,12,22 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
+15 0,7-23/2 * * * node /scripts/jd_wind9_wind_windmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 # 京喜牧场刷金币 活动时间 : 2021-05-28 到 2021-12-31
 10 * * * * node /scripts/jd_jxmc_coin.js >> /scripts/logs/jd_jxmc_coin.log 2>&1
 #东东乐园
