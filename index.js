@@ -15,7 +15,7 @@ exports.main_handler = async (event, context, callback) => {
           break;
         case 'git':
           //2.执行github远端的js文件(因github的raw类型的文件被墙,此方法云函数不推荐)
-          request(`https://raw.githubusercontent.com/LXK9301/jd_scripts/master/${v}.js`, function (error, response, body) {
+          request(`https://gitee.com/wudongdefeng/jd_scripts/master/${v}.js`, function (error, response, body) {
             eval(response.body)
           })
           break;
@@ -27,10 +27,9 @@ exports.main_handler = async (event, context, callback) => {
           })
           break;
         default:
-          //4.执行国内gitee远端的js文件(如果部署在国内节点，选择1或3。默认使用gitee的方式)
-          request(`https://gitee.com/xxx/jd_scripts/raw/master/${v}.js`, function (error, response, body) {
-            eval(response.body)
-          })
+          //执行自己上传的js文件
+          delete require.cache[require.resolve('./'+v+'.js')];
+          require('./'+v+'.js')
           break;
       }
     }
