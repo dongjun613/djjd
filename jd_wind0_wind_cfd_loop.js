@@ -1,6 +1,7 @@
 "use strict";
 /**
  * 财富岛热气球挂后台
+ * export CFD_LOOP_DELAY=20000  // 捡气球间隔时间，单位毫秒
  */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -42,12 +43,17 @@ exports.__esModule = true;
 var date_fns_1 = require("date-fns");
 var axios_1 = require("axios");
 var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
+var dotenv = require("dotenv");
 var CryptoJS = require('crypto-js');
+var crypto = require('crypto');
+var fs = require('fs');
+dotenv.config();
 var appId = 10028, fingerprint, token, enCryptMethodJD;
 var cookie = '', cookiesArr = [], res = '';
+process.env.CFD_LOOP_DELAY ? console.log('设置延迟:', parseInt(process.env.CFD_LOOP_DELAY)) : console.log('设置延迟:10000~25000随机');
 var UserName, index, isLogin, nickName;
 !(function () { return __awaiter(void 0, void 0, void 0, function () {
-    var i, shell, _i, _a, s, j, e_1;
+    var filename, stream, fsHash, i, shell, _i, _a, s, j, e_1, t;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0: return [4 /*yield*/, requestAlgo()];
@@ -56,6 +62,16 @@ var UserName, index, isLogin, nickName;
                 return [4 /*yield*/, requireConfig()];
             case 2:
                 _b.sent();
+                filename = 'jd_cfd_loop.ts';
+                stream = fs.createReadStream(filename);
+                fsHash = crypto.createHash('md5');
+                stream.on('data', function (d) {
+                    fsHash.update(d);
+                });
+                stream.on('end', function () {
+                    var md5 = fsHash.digest('hex');
+                    console.log(filename + "\u7684MD5\u662F:", md5);
+                });
                 _b.label = 3;
             case 3:
                 if (!1) return [3 /*break*/, 19];
@@ -94,8 +110,9 @@ var UserName, index, isLogin, nickName;
                 if (!(j < s.dwNum)) return [3 /*break*/, 13];
                 return [4 /*yield*/, speedUp('_cfd_t,bizCode,dwEnv,dwType,ptag,source,strZone', s.dwType)];
             case 10:
-                _b.sent();
-                return [4 /*yield*/, wait(1000)];
+                res = _b.sent();
+                console.log('捡贝壳:', res.Data.strFirstDesc);
+                return [4 /*yield*/, wait(500)];
             case 11:
                 _b.sent();
                 _b.label = 12;
@@ -113,7 +130,9 @@ var UserName, index, isLogin, nickName;
                 e_1 = _b.sent();
                 console.log(e_1);
                 return [3 /*break*/, 19];
-            case 17: return [4 /*yield*/, wait(getRandomNumberByRange(10, 25))];
+            case 17:
+                t = process.env.CFD_LOOP_DELAY ? parseInt(process.env.CFD_LOOP_DELAY) : getRandomNumberByRange(10000, 25000);
+                return [4 /*yield*/, wait(t)];
             case 18:
                 _b.sent();
                 return [3 /*break*/, 3];
