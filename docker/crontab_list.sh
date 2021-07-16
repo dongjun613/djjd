@@ -9,7 +9,7 @@
 #抢京豆
 0 2 * * * node /scripts/jd_wind_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
 #特物
-30 10 29 6 * node /scripts/jd_wind8_wind_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
+30 6 * * * node /scripts/jd_wind8_wind_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
 #欧洲狂欢
 36 10 * * * node /scripts/jd_wind8_wind_europeancup.js >> /scripts/logs/jd_europeancup.log 2>&1
 #燃动夏季
