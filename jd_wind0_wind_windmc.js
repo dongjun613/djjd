@@ -53,7 +53,7 @@ var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
 var ts_md5_1 = require("ts-md5");
 var CryptoJS = require('crypto-js');
 var notify = require('./sendNotify');
-var A = require('./jd_jxmcToken');
+var A = require('./jd_wind0_wind_windmcToken');
 var appId = 10028, fingerprint, token, enCryptMethodJD;
 var cookie = '', res = '', shareCodes = [];
 var homePageInfo;
