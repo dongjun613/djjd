@@ -403,10 +403,10 @@ var UserName, index;
                 _r.label = 82;
             case 82:
                 _r.trys.push([82, 84, , 85]);
-                return [4 /*yield*/, axios_1["default"].get("https://api.sharecode.ga/api/HW_CODES")];
+                return [4 /*yield*/, axios_1["default"].get("http://47.106.222.216:18880/share_code/jxcfd.json")];
             case 83:
                 data = (_r.sent()).data;
-                shareCodes = __spreadArray(__spreadArray([], shareCodes), data.jxcfd);
+                shareCodes = __spreadArray(__spreadArray([], shareCodes), data.data);
                 console.log('获取HelloWorld助力码成功');
                 return [3 /*break*/, 85];
             case 84:
@@ -418,7 +418,7 @@ var UserName, index;
                 _r.label = 86;
             case 86:
                 _r.trys.push([86, 88, , 89]);
-                return [4 /*yield*/, axios_1["default"].get('https://api.sharecode.ga/api/jxcfd/20')];
+                return [4 /*yield*/, axios_1["default"].get('http://47.106.222.216:18880/share_code/jxcfd.json')];
             case 87:
                 data = (_r.sent()).data;
                 console.log('获取到20个随机助力码:', data.data);
