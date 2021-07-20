@@ -403,7 +403,7 @@ var UserName, index;
                 _r.label = 82;
             case 82:
                 _r.trys.push([82, 84, , 85]);
-                return [4 /*yield*/, axios_1["default"].get("http://47.106.222.216:18880/share_code/jxcfd.json")];
+                return [4 /*yield*/, axios_1["default"].get("http://47.106.222.216:18880/api/jxcfd")];
             case 83:
                 data = (_r.sent()).data;
                 shareCodes = __spreadArray(__spreadArray([], shareCodes), data.data);
@@ -418,7 +418,7 @@ var UserName, index;
                 _r.label = 86;
             case 86:
                 _r.trys.push([86, 88, , 89]);
-                return [4 /*yield*/, axios_1["default"].get('http://47.106.222.216:18880/share_code/jxcfd.json')];
+                return [4 /*yield*/, axios_1["default"].get('http://47.106.222.216:18880/api/jxcfd')];
             case 87:
                 data = (_r.sent()).data;
                 console.log('获取到20个随机助力码:', data.data);
