@@ -13,7 +13,6 @@
 #欧洲狂欢
 36 10 * * * node /scripts/jd_wind8_wind_europeancup.js >> /scripts/logs/jd_europeancup.log 2>&1
 #燃动夏季
-12 6-14/2 * * * node /scripts/jd_wind9_wind_summer_movement.js >> /scripts/logs/jd_summer_movement.log 2>&1
 21 16-22/2 * * * node /scripts/jd_smiek_wind_summer_movement.js >> /scripts/logs/jd_summer_movement.log 2>&1
 #粉丝互动
 15 11 * * * node /scripts/jd_wind8_wind_wxFans.js >> /scripts/logs/jd_wxFans.log 2>&1
