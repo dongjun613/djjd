@@ -9,7 +9,7 @@
 #抢京豆
 0 2 * * * node /scripts/jd_wind_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
 #特物
-30 6 * * * node /scripts/jd_wind8_wind_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
+30 6 * * * node /scripts/jd_wind9_wind_productZ4Brand.js >> /scripts/logs/jd_superBrand.log 2>&1
 #欧洲狂欢
 36 10 * * * node /scripts/jd_wind8_wind_europeancup.js >> /scripts/logs/jd_europeancup.log 2>&1
 #燃动夏季
@@ -98,7 +98,7 @@
 # 赚京豆(微信小程序)
 12 * * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
 # 点点券
-40 0,20 * * * node /scripts/jd_wind0_wind_necklace_new.js >> /scripts/logs/jd_necklace.log 2>&1
+40 0,20 * * * node /scripts/jd_smiek_wind_necklace.js >> /scripts/logs/jd_necklace.log 2>&1
 # 京东快递签到
 47 1 * * * node /scripts/jd_kd.js >> /scripts/logs/jd_kd.log 2>&1
 # 京东汽车(签到满500赛点可兑换500京豆)
@@ -132,8 +132,9 @@
 #监控crazyJoy分红
 10 12 * * * node /scripts/jd_crazy_joy_bonus.js >> /scripts/logs/jd_crazy_joy_bonus.log 2>&1
 #京喜财富岛
-5 7,12,18 * * * node /scripts/jd_wind0_wind_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
 48 0-23/2 * * * node /scripts/jd_smiek_gua_wealth_island.js >> /scripts/logs/jd_smiek_gua_wealth_island.log 2>&1
+# 财富大陆互助
+18 0,1,9,14,18 * * * node /scripts/jd_smiek_gua_wealth_island_help.js >> /scripts/logs/jd_smiek_gua_wealth_island_help.log 2>&1
 # 删除优惠券(默认注释，如需要自己开启，如有误删，已删除的券可以在回收站中还原，慎用)
 #20 9 * * 6 node /scripts/jd_delCoupon.js >> /scripts/logs/jd_delCoupon.log 2>&1
 #家庭号
