@@ -7,17 +7,17 @@
 ==============Quantumult X==============
 [task_local]
 #京喜领88元红包
-4 10 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jxlhb.js, tag=京喜领88元红包, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+4 10 * * * jd_jxlhb.js, tag=京喜领88元红包, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ==============Loon==============
 [Script]
-cron "4 10 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jxlhb.js,tag=京喜领88元红包
+cron "4 10 * * *" script-path=jd_jxlhb.js,tag=京喜领88元红包
 
 ================Surge===============
-京喜领88元红包 = type=cron,cronexp="4 10 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jxlhb.js
+京喜领88元红包 = type=cron,cronexp="4 10 * * *",wake-system=1,timeout=3600,script-path=jd_jxlhb.js
 
 ===============小火箭==========
-京喜领88元红包 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jxlhb.js, cronexpr="4 10 * * *", timeout=3600, enable=true
+京喜领88元红包 = type=cron,script-path=jd_jxlhb.js, cronexpr="4 10 * * *", timeout=3600, enable=true
  */
 const $ = new Env('京喜领88元红包');
 const notify = $.isNode() ? require('./sendNotify') : {};
@@ -94,7 +94,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
     cookie = cookiesArr[i];
     $.canOpenGrade = true;
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-    const grades = [1, 2, 3, 4, 5, 6, 7];
+    const grades = [1, 2, 3, 4, 5, 6];
     for (let grade of grades) {
       if (!$.canOpenGrade) break;
       if (!$.packetIdArr[i]) continue;
@@ -156,11 +156,15 @@ function getUserInfo() {
           data = JSON.parse(data)
           if (data.iRet === 0) {
             console.log(`获取助力码成功：${data.Data.strUserPin}\n`);
-            if (data.Data.strUserPin) {
-              $.packetIdArr.push({
-                strUserPin: data.Data.strUserPin,
-                userName: $.UserName
-              })
+            if (data.Data['dwCurrentGrade'] >= 6) {
+              console.log(`6个阶梯红包已全部拆完\n`)
+            } else {
+              if (data.Data.strUserPin) {
+                $.packetIdArr.push({
+                  strUserPin: data.Data.strUserPin,
+                  userName: $.UserName
+                })
+              }
             }
           } else {
             console.log(`获取助力码失败：${data.sErrMsg}\n`);
@@ -184,7 +188,7 @@ function enrollFriend(strPin) {
       try {
         if (err) {
           console.log(`\n${$.name}:  API查询请求失败 ‼️‼️`)
-          $.log(JSON.stringify(err));
+          $.logErr(err);
         } else {
           // console.log('助力结果', data)
           data = JSON.parse(data)
