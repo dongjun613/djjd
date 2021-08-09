@@ -12,8 +12,6 @@
 30 6 * * * node /scripts/jd_wind9_wind_productZ4Brand.js >> /scripts/logs/jd_superBrand.log 2>&1
 #欧洲狂欢
 36 10 * * * node /scripts/jd_wind8_wind_europeancup.js >> /scripts/logs/jd_europeancup.log 2>&1
-#燃动夏季
-21 16-22/2 * * * node /scripts/jd_smiek_wind_summer_movement.js >> /scripts/logs/jd_summer_movement.log 2>&1
 #粉丝互动
 15 11 * * * node /scripts/jd_wind8_wind_wxFans.js >> /scripts/logs/jd_wxFans.log 2>&1
 #开卡瓜分
@@ -38,8 +36,6 @@
 30 6 * * * node /scripts/jd_wind_goodMorning.js >> /scripts/logs/jd_goodMorning.log 2>&1
 #运动会
 1 10 * * * node /scripts/jd_wind_olympicgames.js >> /scripts/logs/jd_wind_olympicgames.log 2>&1
-#QQ星系牧场
-7 0-23/3 * * * node /scripts/jd_wind_qqxing.js >> /scripts/logs/jd_wind_qqxing.log 2>&1
 #半点红包雨
 30 0-23/1 * * * node /scripts/jd_wind2_long_half_redrain.js >> /scripts/logs/jd_wind2_long_half_redrain.log 2>&1
 # MM领京豆
