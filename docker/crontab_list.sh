@@ -146,7 +146,7 @@
 # 领金贴
 5 0 * * * node /scripts/jd_jin_tie.js >> /scripts/logs/jd_jin_tie.log 2>&1
 #京喜牧场
-15 0,7-23/2 * * * node /scripts/jd_wind9_wind_windmc.js >> /scripts/logs/jd_jxmc.log 2>&1
+15 */2 * * * node /scripts/jd_wind9_wind_windmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 #东东乐园
 30 7 * * * node /scripts/jd_ddnc_farmpark.js >> /scripts/logs/jd_ddnc_farmpark.log 2>&1
 #柠檬我是大老板农场
