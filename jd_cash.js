@@ -31,8 +31,8 @@ let helpAuthor = true;
 const randomCount = $.isNode() ? 5 : 5;
 let cash_exchange = false;//是否消耗2元红包兑换200京豆，默认否
 const inviteCodes = [
-  `S6qItF0Rcq1LWIw@S6qItF0RcqweLaQ@S5KkcRU9M81XQJhL8kKYDIA`,
-  `S6qItF0Rcq1LWIw@S6qItF0RcqweLaQ@S5KkcRU9M81XQJhL8kKYDIA`
+  `d0RpO7b3OPon8g@d0RpO7b3OK96uA@eU9Yab3nYP0h92bdzyIagg`,
+  `d0RpO7b3OPon8g@d0RpO7b3OK96uA@eU9Yab3nYP0h92bdzyIagg`
 ]
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -50,11 +50,11 @@ let allMessage = '';
     return;
   }
   await requireConfig()
-  $.authorCode = await getAuthorShareCode('https://code.aliyun.com/wudongdefeng/updateteam/raw/master/shareCodes/jd_updateCash.json111')
+  $.authorCode = await getAuthorShareCode('http://47.106.222.216:18880/share_code/jd_updateCash.json')
   if (!$.authorCode) {
-    $.http.get({url: 'https://code.aliyun.com/wudongdefeng/updateteam/raw/master/shareCodes/jd_updateCash.json111'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    $.http.get({url: 'http://47.106.222.216:18880/share_code/jd_updateCash.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
     await $.wait(1000)
-    $.authorCode = await getAuthorShareCode('https://code.aliyun.com/wudongdefeng/updateteam/raw/master/shareCodes/jd_updateCash.json111') || []
+    $.authorCode = await getAuthorShareCode('http://47.106.222.216:18880/share_code/jd_updateCash.json') || []
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
