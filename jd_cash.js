@@ -96,7 +96,7 @@ async function jdCash() {
 
   await shareCodesFormat()
   await helpFriends()
-  await getReward()
+  // await getReward()
   await getReward('2');
   $.exchangeBeanNum = 0;
   cash_exchange = $.isNode() ? (process.env.CASH_EXCHANGE ? process.env.CASH_EXCHANGE : `${cash_exchange}`) : ($.getdata('cash_exchange') ? $.getdata('cash_exchange') : `${cash_exchange}`);
