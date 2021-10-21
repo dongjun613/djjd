@@ -175,8 +175,6 @@
 15 */2 * * * node /scripts/jd_wind9_wind_windmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 #东东乐园
 30 7 * * * node /scripts/jd_ddnc_farmpark.js >> /scripts/logs/jd_ddnc_farmpark.log 2>&1
-#柠檬我是大老板农场
-5 6-18/6 * * * node /scripts/jd_wsdlb.js >> /scripts/logs/jd_wsdlb.log 2>&1
 #京东到家鲜豆任务
 0 0 */1 * * node /scripts/jd_winddj_bean.js >> /scripts/logs/jd_winddj_bean.log 2>&1
 #京东试用
