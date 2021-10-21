@@ -39,6 +39,7 @@ let autoCode = '';
     if(res.length > 0){
         autoCode = getRandomArrayElements(res,1)[0];
     }
+    autoCode = 'S6qItF0RcqweLaQ';
     mainPin = decodeURIComponent(cookiesArr[0].match(/pt_pin=(.+?);/) && cookiesArr[0].match(/pt_pin=(.+?);/)[1])
     if(cookiesArr.length>0){
         const promiseArr = cookiesArr.map((ck, index) => main(ck));
