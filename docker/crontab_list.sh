@@ -10,6 +10,8 @@
 10 17 * * * node /scripts/jd_ls_lucky_egg.js >> /scripts/logs/jd_ls_lucky_egg.log 2>&1
 # 一加手机 活动时间：10.8 - 11.13
 10 14 * * * node /scripts/jd_ls_yijia.js >> /scripts/logs/jd_ls_yijia.log 2>&1
+# 京东小魔方
+31 2,8 * * * node /scripts/jd_ls_mf.js >> /scripts/logs/jd_ls_mf.js.log 2>&1
 # 攥金币
 10 5,10 * * * node /scripts/jd_GoldcoinToGift.js >> /scripts/logs/jd_GoldcoinToGift.log 2>&1
 # 东东游戏
