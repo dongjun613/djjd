@@ -115,7 +115,7 @@ async function main(ck){
         }
         if(oneTask.type === '2'){
             codeList.push(oneTask.assistId);
-            console.log(oneTask.assistId);
+            console.log(${oneTask.assistId});
             if(JSON.stringify(ownCode) === '{}' && mainPin === userName){
                 ownCode = {'user':userName,'projectId':projectId,'assignmentId':oneTask.assignmentId,"itemId":oneTask.assistId,'type':2}
             }
