@@ -4,6 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 限时领金豆
+23 0,9 * * * node /scripts/jd_ls_xsqjd.js >> /scripts/logs/jd_ls_xsqjd.log 2>&1
 # 城城分现金
 0 0-23/5,22 * 10 * node /scripts/jd_city.js >> /scripts/logs/jd_city.log 2>&1
 # 扭蛋 活动时间：2021-10-11 12:44 至 2021-11-10 12:44
