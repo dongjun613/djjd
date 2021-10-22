@@ -4,6 +4,12 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 惊喜大作战
+50 1 * * * node /scripts/jd_ls_jxdzz.js >> /scripts/logs/jd_ls_jxdzz.log 2>&1
+# 时尚宠粉趴
+20 2 * * * node /scripts/jd_ls_fashion.js >> /scripts/logs/jd_ls_fashion.log 2>&1
+# 环游记
+20 3 * * * node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
 # APP-美妆馆-右侧浮窗
 23 9,10 * * * node /scripts/jd_ls_selectionOfficer.js >> /scripts/logs/jd_ls_selectionOfficer.log 2>&1
 # 预售福利机
