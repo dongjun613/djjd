@@ -24,10 +24,6 @@
 43 15 13-26 9 * node /scripts/jd_star_wind_film_museum.js >> /scripts/logs/jd_star_wind_film_museum.log 2>&1
 # 东东世界
 20 20 * * * node /scripts/jd_ddworld.js >> /scripts/logs/jd_ddworld.log 2>&1
-# 企有此礼
-30 0 * * *  node /scripts/jd_qycl.js >> /scripts/logs/jd_qycl.log 2>&1
-# 跳跳乐
-1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 希捷品牌日
 17 10 * 9,10 * node /scripts/jd_smiek_gua_UnknownTask4.js >> /scripts/logs/jd_smiek_gua_UnknownTask4.log 2>&1
 #内容鉴赏官
@@ -121,8 +117,6 @@
 26 * * * * node /scripts/jd_jdfactory.js >> /scripts/logs/jd_jdfactory.log 2>&1
 # 赚京豆(微信小程序)
 12 * * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
-# 点点券
-40 0,20 * * * node /scripts/jd_smiek_wind_necklace.js >> /scripts/logs/jd_necklace.log 2>&1
 # 京东快递签到
 47 1 * * * node /scripts/jd_kd.js >> /scripts/logs/jd_kd.log 2>&1
 # 京东汽车(签到满500赛点可兑换500京豆)
@@ -133,8 +127,6 @@
 6 0-5/1,11 * * * node /scripts/jd_jdzz.js >> /scripts/logs/jd_jdzz.log 2>&1
 # crazyJoy自动每日任务
 30 7,23 * * * node /scripts/jd_crazy_joy.js >> /scripts/logs/jd_crazy_joy.log 2>&1
-# 京东汽车旅程赛点兑换金豆
-0 0 * * * node /scripts/jd_car_exchange.js >> /scripts/logs/jd_car_exchange.log 2>&1
 # 导到所有互助码
 23 7 * * * node /scripts/jd_get_share_code.js >> /scripts/logs/jd_get_share_code.log 2>&1
 # 口袋书店
