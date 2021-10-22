@@ -4,6 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# APP-美妆馆-右侧浮窗
+23 9,10 * * * node /scripts/jd_ls_selectionOfficer.js >> /scripts/logs/jd_ls_selectionOfficer.log 2>&1
 # 预售福利机
 46 0,9 * * * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
 # 限时领金豆
