@@ -44,8 +44,6 @@
 30 6 * * * node /scripts/jd_wind9_wind_productZ4Brand.js >> /scripts/logs/jd_superBrand.log 2>&1
 #欧洲狂欢
 36 10 * * * node /scripts/jd_wind8_wind_europeancup.js >> /scripts/logs/jd_europeancup.log 2>&1
-#粉丝互动
-15 11 * * * node /scripts/jd_wind8_wind_wxFans.js >> /scripts/logs/jd_wxFans.log 2>&1
 #开卡瓜分
 30 16 1 7 * node /scripts/jd_wind5_zooCaptain01.js >> /scripts/logs/jd_wind5_zooCaptain01.log 2>&1
 #汪汪乐园养joy
