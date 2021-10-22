@@ -40,8 +40,6 @@
 45 0,23 * * * node /scripts/jd_speed_redpocke.js >> /scripts/logs/jd_speed_redpocke.log 2>&1
 #抢京豆
 0 2 * * * node /scripts/jd_wind_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
-#特物
-30 6 * * * node /scripts/jd_wind9_wind_productZ4Brand.js >> /scripts/logs/jd_superBrand.log 2>&1
 #欧洲狂欢
 36 10 * * * node /scripts/jd_wind8_wind_europeancup.js >> /scripts/logs/jd_europeancup.log 2>&1
 #开卡瓜分
