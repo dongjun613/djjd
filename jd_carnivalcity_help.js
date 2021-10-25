@@ -283,7 +283,7 @@ function shareCodesFormat() {
     $.newShareCodes = [];
     const readShareCodeRes = await readShareCode();
     if (readShareCodeRes && readShareCodeRes.code === 200) {
-      $.newShareCodes = [...new Set([...$.shareCodes, ...(readShareCodeRes.data || [])])];
+      $.newShareCodes = [...new Set([...(readShareCodeRes.data || []), ...$.shareCodes])];
     } else {
       $.newShareCodes = [...new Set([...$.shareCodes])];
     }
