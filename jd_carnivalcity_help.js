@@ -283,9 +283,9 @@ function shareCodesFormat() {
     $.newShareCodes = [];
     const readShareCodeRes = await readShareCode();
     if (readShareCodeRes && readShareCodeRes.code === 200) {
-      $.newShareCodes = [...new Set([...$.shareCodes, ...$.updatePkActivityIdRes, ...(readShareCodeRes.data || [])])];
+      $.newShareCodes = [...new Set([...$.shareCodes, ...(readShareCodeRes.data || [])])];
     } else {
-      $.newShareCodes = [...new Set([...$.shareCodes, ...$.updatePkActivityIdRes])];
+      $.newShareCodes = [...new Set([...$.shareCodes])];
     }
     console.log(`\n\n您将要助力的好友${JSON.stringify($.newShareCodes)}`)
     resolve();
