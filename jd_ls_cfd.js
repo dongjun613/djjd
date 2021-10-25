@@ -553,7 +553,6 @@ var shareCodes = [], shareCodesSelf = [], shareCodesHW = [], isCollector = false
                 _2.sent();
                 return [4 /*yield*/, api('story/SpecialUserOper', '_cfd_t,bizCode,ddwTriggerDay,dwEnv,dwType,ptag,source,strStoryId,strZone,triggerType', {
                         strStoryId: res.StoryInfo.StoryList[0].strStoryId,
-                        axios_1["default"].get("http://47.106.222.216:18880/api/jxcfd"),
                         triggerType: 0,
                         ddwTriggerDay: res.StoryInfo.StoryList[0].ddwTriggerDay
                     })];
