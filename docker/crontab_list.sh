@@ -4,6 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 潮玩儿制躁团
+23 11,12 * * * node /scripts/jd_ls_zzt.js >> /scripts/logs/jd_ls_zzt.log 2>&1
 # 电竞预言家
 10 9,15,19 * * * node /scripts/jd_ls_lol.js >> /scripts/logs/jd_ls_lol.log 2>&1
 # 狂欢节
