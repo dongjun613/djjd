@@ -9,7 +9,6 @@ b、 每日第2-10000名，可获得50个京豆
 c、 每日第10001-30000名可获得20个京豆
 d、 30000名之外，0京豆
 
-
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ===================quantumultx================
 [task_local]
@@ -30,12 +29,8 @@ const $ = new Env('京东手机狂欢城');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-
 //IOS等用户直接用NobyDa的jd cookie
-
 let cookiesArr = [], cookie = '', message = '', allMessage = '';
-
-
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -45,7 +40,6 @@ if ($.isNode()) {
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
-let inviteCodes = [];
 const JD_API_HOST = 'https://api.m.jd.com/api';
 const activeEndTime = '2021/11/14 00:00:00+08:00';//活动结束时间
 let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000;
@@ -61,8 +55,6 @@ let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*
     if ($.isNode()) await notify.sendNotify($.name + '活动已结束', `请删除此脚本\n咱江湖再见`);
     return
   }
-  await updateShareCodesCDN();
-  await requireConfig();
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -79,7 +71,7 @@ let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*
       $.blockAccount = false;//黑号
       message = '';
       await TotalBean();
-      console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
+      console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
 
@@ -88,38 +80,13 @@ let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*
         }
         continue
       }
-      await shareCodesFormat();
       await JD818();
     }
   }
-  for (let i = 0; i < cookiesArr.length; i++) {
-    if (cookiesArr[i]) {
-      cookie = cookiesArr[i];
-      $.canHelp = true;//能否助力
-      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-      if ((cookiesArr && cookiesArr.length >= 1) && $.canHelp) {
-        console.log(`\n先自己账号内部相互邀请助力\n`);
-        for (let item of $.temp) {
-          console.log(`\n${$.UserName} 去参助力 ${item}`);
-          const helpRes = await toHelp(item.trim());
-          if (helpRes.data.status === 5) {
-            console.log(`助力机会已耗尽，跳出助力`);
-            $.canHelp = false;
-            break;
-          }
-        }
-      }
-      if ($.canHelp) {
-        console.log(`\n\n如果有剩余助力机会，则给作者lxk0301以及随机码助力`)
-        await doHelp();
-      }
-    }
-  }
-  // console.log(JSON.stringify($.temp))
   if (allMessage) {
     //NODE端,默认每月一日运行进行推送通知一次
     if ($.isNode()) {
-      await notify.sendNotify($.name, allMessage, { url: JD_API_HOST });
+      await notify.sendNotify($.name, allMessage, { url: "https://carnivalcity.m.jd.com/" });
       $.msg($.name, '', allMessage);
     }
   }
@@ -556,47 +523,6 @@ function check() {
       }
     })
   });
-  return new Promise((resolve)=>{
-    var request = require('request');
-    let timestamp = (new Date()).getTime()
-    var headers = {
-      'Sgm-Context': '144512924112128160;144512924112128160',
-      'Host': 'carnivalcity.m.jd.com',
-      'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Mobile/15E148 Safari/604.1',
-      'sign': 'c5a92160e87206287af0faee2b056429',
-      'Referer': 'https://carnivalcity.m.jd.com/',
-      'timestamp': `${timestamp}`,
-      'Cookie': cookie
-    };
-
-    var options = {
-      url: `https://carnivalcity.m.jd.com/khc/record/convertRecord?pageNum=1&t=${timestamp}`,
-      headers: headers
-    };
-
-    async function callback(error, response, body) {
-      if (!error && response.statusCode == 200) {
-        // $.log(body);
-        let result = JSON.parse(body)
-        let message = ""
-        if (result.data.length > 0) {
-          message += message += `\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`
-        }
-        for (let obj of result.data) {
-          if (obj.hasOwnProperty('fillStatus') && obj.fillStatus != true) {
-            message += JSON.stringify(obj)
-          }
-        }
-        if (message.length > 0) {
-          await notify.sendNotify($.name, message);
-        }
-        resolve()
-      }
-    }
-
-    request(options, callback);
-
-  })
 }
 function myRank() {
   return new Promise(resolve => {
@@ -833,39 +759,6 @@ function taskUrl(body = {}) {
   }
 }
 
-function P(t) {
-  return P = "function" === typeof Symbol && "symbol" === typeof Symbol.iterator ? function (t) {
-        return typeof t
-      }
-      : function (t) {
-        return t && "function" === typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t
-      }
-      ,
-      P(t)
-}
-function za(t, e, n) {
-  var a = ""
-      , i = n.split("?")[1] || "";
-  if (t) {
-    if ("string" == typeof t)
-      a = t + i;
-    else if ("object" == P(t)) {
-      var r = [];
-      for (var s in t)
-        r.push(s + "=" + t[s]);
-      a = r.length ? r.join("&") + i : i
-    }
-  } else
-    a = i;
-  if (a) {
-    var o = a.split("&").sort().join("");
-    return $.md5(o + e)
-  }
-  return $.md5(e)
-}
-
-
-
 function TotalBean() {
   return new Promise(async resolve => {
     const options = {
@@ -913,9 +806,9 @@ function TotalBean() {
 
 async function showMsg() {
   if ($.beans) {
-    allMessage += `京东账号${$.index} ${$.nickName || $.UserName}\n本次运行获得：${$.beans}京豆\n${message}活动地址：${JD_API_HOST}${$.index !== cookiesArr.length ? '\n\n' : ''}`
+    allMessage += `京东账号${$.index} ${$.nickName || $.UserName}\n本次运行获得：${$.beans}京豆\n${message}活动地址：https://carnivalcity.m.jd.com/${$.index !== cookiesArr.length ? '\n\n' : ''}`
   }
-  $.msg($.name, `京东账号${$.index} ${$.nickName || $.UserName}`, `${message}具体详情点击弹窗跳转后即可查看`, {"open-url": JD_API_HOST});
+  $.msg($.name, `京东账号${$.index} ${$.nickName || $.UserName}`, `${message}具体详情点击弹窗跳转后即可查看`, {"open-url": "https://carnivalcity.m.jd.com/"});
 }
 
 function jsonParse(str) {
