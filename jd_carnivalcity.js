@@ -1,6 +1,6 @@
 /*
 京东手机狂欢城活动，每日可获得20+以上京豆（其中20京豆是往期奖励，需第一天参加活动后，第二天才能拿到）
-活动时间: 2021-5-24至2021-6-20
+活动时间: 2021-10-23至2021-11-13
 活动入口：暂无 [活动地址](https://carnivalcity.m.jd.com/)
 
 往期奖励：
@@ -14,17 +14,17 @@ d、 30000名之外，0京豆
 ===================quantumultx================
 [task_local]
 #京东手机狂欢城
-0 0-18/6 * * * jd_carnivalcity.js, tag=京东手机狂欢城, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+0 0-18/6 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity.js, tag=京东手机狂欢城, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 =====================Loon================
 [Script]
-cron "0 0-18/6 * * *" script-path=jd_carnivalcity.js, tag=京东手机狂欢城
+cron "0 0-18/6 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity.js, tag=京东手机狂欢城
 
 ====================Surge================
-京东手机狂欢城 = type=cron,cronexp=0 0-18/6 * * *,wake-system=1,timeout=3600,script-path=jd_carnivalcity.js
+京东手机狂欢城 = type=cron,cronexp=0 0-18/6 * * *,wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity.js
 
 ============小火箭=========
-5G狂欢城 = type=cron,script-path=jd_carnivalcity.js, cronexpr="0 0,6,12,18 * * *", timeout=3600, enable=true
+京东手机狂欢城 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity.js, cronexpr="0 0-18/6 * * *", timeout=3600, enable=true
 */
 const $ = new Env('京东手机狂欢城');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -46,8 +46,8 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 let inviteCodes = [];
-const JD_API_HOST = 'https://carnivalcity.m.jd.com';
-const activeEndTime = '2021/06/21 00:00:00+08:00';//活动结束时间
+const JD_API_HOST = 'https://api.m.jd.com/api';
+const activeEndTime = '2021/11/14 00:00:00+08:00';//活动结束时间
 let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000;
 !(async () => {
   if (!cookiesArr[0]) {
@@ -110,7 +110,7 @@ let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*
         }
       }
       if ($.canHelp) {
-        console.log(`\n\n如果有剩余助力机会，则给作者以及随机码助力`)
+        console.log(`\n\n如果有剩余助力机会，则给作者lxk0301以及随机码助力`)
         await doHelp();
       }
     }
@@ -138,6 +138,12 @@ async function JD818() {
     await getHelp();//获取邀请码
     if ($.blockAccount) return
     await indexInfo(true);//获取任务
+    $.stop = false;
+    let num = 0;
+    do {
+      await headInfo()
+      num++
+    } while (!$.stop && num < 30)
     await doHotProducttask();//做热销产品任务
     await doBrandTask();//做品牌手机任务
     await doBrowseshopTask();//逛好货街，做任务
@@ -152,6 +158,115 @@ async function JD818() {
     $.logErr(e)
   }
 }
+
+function headInfo() {
+  return new Promise(resolve => {
+    const body = {"apiMapping":"/khc/index/headInfo"}
+    $.post(taskUrl(body), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} headInfo API请求失败，请检查网路重试`)
+        } else {
+          if (data) {
+            data = JSON.parse(data);
+            if (data.code === 200) {
+              if (data.data.state === "0") {
+                if (data.data.taskType === "13" || data.data.taskType === "15") {
+                  console.log(`开始 【顶部】浏览任务,需等待6秒`)
+                  await doBrowseHead(data.data.taskIndex, data.data.taskId, data.data.taskType)
+                } else if (data.data.taskType === "14") {
+                  console.log(`开始 【顶部】加购任务`)
+                  await getHeadJoinPrize(data.data.taskId, data.data.taskIndex)
+                }
+              } else {
+                $.stop = true
+              }
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+function doBrowseHead(taskIndex, taskId, taskType) {
+  return new Promise(resolve => {
+    const body = {"taskIndex":taskIndex,"taskId":taskId,"taskType":taskType,"apiMapping":"/khc/task/doBrowseHead"}
+    $.post(taskUrl(body), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} doBrowseHead API请求失败，请检查网路重试`)
+        } else {
+          if (data) {
+            data = JSON.parse(data);
+            if (data.code === 200) {
+              await $.wait(6000)
+              await getHeadBrowsePrize(data.data.browseId)
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+function getHeadBrowsePrize(browseId) {
+  return new Promise(resolve => {
+    const body = {"browseId":browseId,"apiMapping":"/khc/task/getHeadBrowsePrize"}
+    $.post(taskUrl(body), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} getHeadBrowsePrize API请求失败，请检查网路重试`)
+        } else {
+          if (data) {
+            data = JSON.parse(data);
+            if (data.code === 200) {
+              console.log(`getHeadBrowsePrize 领取奖励结果`, JSON.stringify(data), '\n')
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+function getHeadJoinPrize(taskId, taskIndex) {
+  return new Promise(resolve => {
+    const body = {"taskId":taskId,"taskIndex":taskIndex,"apiMapping":"/khc/task/getHeadJoinPrize"}
+    $.post(taskUrl(body), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} getHeadJoinPrize API请求失败，请检查网路重试`)
+        } else {
+          if (data) {
+            data = JSON.parse(data);
+            if (data.code === 200) {
+              console.log(`getHeadJoinPrize 领取奖励结果`, JSON.stringify(data), '\n')
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+
 async function doHotProducttask() {
   $.hotProductList = $.hotProductList.filter(v => !!v && v['status'] === "1");
   if ($.hotProductList && $.hotProductList.length) console.log(`开始 【浏览热销手机产品】任务,需等待6秒`)
@@ -166,9 +281,8 @@ async function doHotProducttask() {
 //做任务 API
 function doBrowse(id = "", brandId = "", taskMark = "hot", type = "browse", logMark = "browseHotSku") {
   return new Promise(resolve => {
-    const body = `brandId=${brandId}&id=${id}&taskMark=${taskMark}&type=${type}&logMark=${logMark}`;
-    const options = taskPostUrl('/khc/task/doBrowse', body)
-    $.post(options, (err, resp, data) => {
+    const body = {"brandId":brandId,"id":id,"taskMark":taskMark,"type":type,"logMark":logMark,"apiMapping":"/khc/task/doBrowse"}
+    $.post(taskUrl(body), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -193,9 +307,8 @@ function doBrowse(id = "", brandId = "", taskMark = "hot", type = "browse", logM
 //领取奖励
 function getBrowsePrize(browseId, brandId = '') {
   return new Promise(resolve => {
-    const body = `brandId=${brandId}&browseId=${browseId}`;
-    const options = taskPostUrl('/khc/task/getBrowsePrize', body)
-    $.post(options, (err, resp, data) => {
+    const body = {"brandId":brandId,"browseId":browseId,"apiMapping":"/khc/task/getBrowsePrize"}
+    $.post(taskUrl(body), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -222,13 +335,13 @@ async function doBrandTask() {
   }
 }
 function brandTaskInfo(brandId) {
-  const options = taskUrl('/khc/index/brandTaskInfo', { t: Date.now(), brandId })
+  const body = {"brandId":brandId,"apiMapping":"/khc/index/brandTaskInfo"}
   $.skuTask = [];
   $.shopTask = [];
   $.meetingTask = [];
   $.questionTask = {};
   return new Promise( (resolve) => {
-    $.get(options, async (err, resp, data) => {
+    $.get(taskUrl(body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -289,9 +402,8 @@ function brandTaskInfo(brandId) {
 }
 function doQuestion(brandId, questionId, result) {
   return new Promise(resolve => {
-    const body = `brandId=${brandId}&questionId=${questionId}&result=${result}`;
-    const options = taskPostUrl('/khc/task/doQuestion', body)
-    $.post(options, (err, resp, data) => {
+    const body = {"brandId":brandId,"questionId":questionId,"result":result,"apiMapping":"/khc/task/doQuestion"}
+    $.post(taskUrl(body), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -324,12 +436,12 @@ async function doBrowseshopTask() {
   }
 }
 function indexInfo(flag = false) {
-  const options = taskUrl('/khc/index/indexInfo', { t: Date.now() })
+  const body = {"apiMapping":"/khc/index/indexInfo"}
   $.hotProductList = [];
   $.brandList = [];
   $.browseshopList = [];
   return new Promise( (resolve) => {
-    $.get(options, async (err, resp, data) => {
+    $.post(taskUrl(body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -337,9 +449,9 @@ function indexInfo(flag = false) {
         } else {
           data = JSON.parse(data);
           if (data.code === 200) {
-            $.hotProductList = data['data']['hotProductList'];
-            $.brandList = data['data']['brandList'];
-            $.browseshopList = data['data']['browseshopList'];
+            $.hotProductList = data['data']['hotProductList'] || [];
+            $.brandList = data['data']['brandList'] || [];
+            $.browseshopList = data['data']['browseshopList'] || [];
             if (flag) {
               // console.log(`助力情况：${data['data']['supportedNums']}/${data['data']['supportNeedNums']}`);
               // message += `邀请好友助力：${data['data']['supportedNums']}/${data['data']['supportNeedNums']}\n`
@@ -358,9 +470,9 @@ function indexInfo(flag = false) {
 }
 //获取助力信息
 function supportList() {
-  const options = taskUrl('/khc/index/supportList', { t: Date.now() })
+  const body = {"apiMapping":"/khc/index/supportList"}
   return new Promise( (resolve) => {
-    $.get(options, async (err, resp, data) => {
+    $.get(taskUrl(body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -382,9 +494,9 @@ function supportList() {
 }
 //积分抽奖
 function lottery() {
-  const options = taskUrl('/khc/record/lottery', { t: Date.now() })
+  const body = {"apiMapping":"/khc/record/lottery"}
   return new Promise( (resolve) => {
-    $.get(options, async (err, resp, data) => {
+    $.get(taskUrl(body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -414,9 +526,9 @@ function lottery() {
 }
 //查询抽奖记录(未兑换的)
 function check() {
-  const options = taskUrl('/khc/record/convertRecord', { t: Date.now(), pageNum: 1 })
+  const body = {"pageNum":1,"apiMapping":"/khc/record/convertRecord"}
   return new Promise( (resolve) => {
-    $.get(options, async (err, resp, data) => {
+    $.get(taskUrl(body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -488,11 +600,8 @@ function check() {
 }
 function myRank() {
   return new Promise(resolve => {
-    const body = {
-      t: Date.now()
-    }
-    const options = taskUrl("/khc/rank/myPastRanks", body);
-    $.get(options, async (err, resp, data) => {
+    const body = {"apiMapping":"/khc/rank/myPastRanks"}
+    $.post(taskUrl(body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -534,9 +643,8 @@ function myRank() {
 //领取往期奖励API
 function saveJbean(date) {
   return new Promise(resolve => {
-    const body = "date=" + date;
-    const options = taskPostUrl('/khc/rank/getRankJingBean', body)
-    $.post(options, (err, resp, data) => {
+    const body = {"date":date,"apiMapping":"/khc/rank/getRankJingBean"}
+    $.post(taskUrl(body), (err, resp, data) => {
       try {
         // console.log('领取京豆结果', data);
         if (err) {
@@ -565,11 +673,10 @@ async function doHelp() {
   }
 }
 //助力API
-function toHelp(code = "7c4deed4-2a26-4fa1-bb27-8421f02f30a6") {
+function toHelp(code) {
   return new Promise(resolve => {
-    const body = "shareId=" + code;
-    const options = taskPostUrl('/khc/task/doSupport', body)
-    $.post(options, (err, resp, data) => {
+    const body = {"shareId":code,"apiMapping":"/khc/task/doSupport"}
+    $.post(taskUrl(body), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -593,11 +700,8 @@ function toHelp(code = "7c4deed4-2a26-4fa1-bb27-8421f02f30a6") {
 //获取邀请码API
 function getHelp() {
   return new Promise(resolve => {
-    const body = {
-      t: Date.now()
-    }
-    const options = taskUrl("/khc/task/getSupport", body);
-    $.get(options, async (err, resp, data) => {
+    const body = {"apiMapping":"/khc/task/getSupport"}
+    $.get(taskUrl(body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -624,12 +728,8 @@ function getHelp() {
 //获取当前活动总京豆数量
 function getListJbean() {
   return new Promise(resolve => {
-    const body = {
-      t: Date.now(),
-      pageNum: ``
-    }
-    const options = taskUrl("/khc/record/jingBeanRecord", body);
-    $.get(options, async (err, resp, data) => {
+    const body = {"pageNum":"","apiMapping":"/khc/record/jingBeanRecord"}
+    $.post(taskUrl(body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -654,12 +754,8 @@ function getListJbean() {
 //查询累计获得积分
 function getListIntegral() {
   return new Promise(resolve => {
-    const body = {
-      t: Date.now(),
-      pageNum: ``
-    }
-    const options = taskUrl("/khc/record/integralRecord", body);
-    $.get(options, async (err, resp, data) => {
+    const body = {"pageNum":"","apiMapping":"/khc/record/integralRecord"}
+    $.post(taskUrl(body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -690,11 +786,8 @@ function getListIntegral() {
 //查询今日累计积分与排名
 function getListRank() {
   return new Promise(resolve => {
-    const body = {
-      t: Date.now()
-    }
-    const options = taskUrl("/khc/rank/dayRank", body);
-    $.get(options, async (err, resp, data) => {
+    const body = {"apiMapping":"/khc/rank/dayRank"}
+    $.post(taskUrl(body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -723,149 +816,19 @@ function getListRank() {
   })
 }
 
-function updateShareCodesCDN(url = 'https://cdn.jsdelivr.net/gh/gitupdate/updateTeam@master/shareCodes/jd_cityShareCodes.json') {
-  return new Promise(resolve => {
-    $.get({url , headers:{"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")}, timeout: 200000}, async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          $.updatePkActivityIdRes = JSON.parse(data);
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-
-function readShareCode() {
-  console.log(`开始`)
-  return new Promise(async resolve => {
-    $.get({url: `http://share.turinglabs.net/api/v3/carnivalcity/query/20/`, 'timeout': 20000}, (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data);
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data);
-      }
-    })
-    await $.wait(20000);
-    resolve()
-  })
-}
-//格式化助力码
-function shareCodesFormat() {
-  return new Promise(async resolve => {
-    // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = [];
-    if ($.shareCodesArr[$.index - 1]) {
-      $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
-    } else {
-      console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
-      const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
-      $.newShareCodes = inviteCodes[tempIndex] && inviteCodes[tempIndex].split('@') || [];
-      if ($.updatePkActivityIdRes && $.updatePkActivityIdRes.length) $.newShareCodes = [...$.updatePkActivityIdRes, ...$.newShareCodes];
-    }
-    const readShareCodeRes = await readShareCode();
-    if (readShareCodeRes && readShareCodeRes.code === 200) {
-      $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];
-    }
-    // console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)
-    resolve();
-  })
-}
-function requireConfig() {
-  return new Promise(resolve => {
-    console.log(`开始获取${$.name}配置文件\n`);
-    let shareCodes = [];
-    if ($.isNode()) {
-      if (process.env.JD818_SHARECODES) {
-        if (process.env.JD818_SHARECODES.indexOf('\n') > -1) {
-          shareCodes = process.env.JD818_SHARECODES.split('\n');
-        } else {
-          shareCodes = process.env.JD818_SHARECODES.split('&');
-        }
-      }
-    }
-    console.log(`共${cookiesArr.length}个京东账号\n`);
-    $.shareCodesArr = [];
-    if ($.isNode()) {
-      Object.keys(shareCodes).forEach((item) => {
-        if (shareCodes[item]) {
-          $.shareCodesArr.push(shareCodes[item])
-        }
-      })
-    }
-    console.log(`您提供了${$.shareCodesArr.length}个账号的${$.name}助力码\n`);
-    resolve()
-  })
-}
-
-function taskUrl(t, a) {
-  const r = Date.now().toString();
-  // const r = "1617242355798";
-  // 07035cabb557f09a51617242355798
-  let o = "07035cabb557f09a5" + r;
-  // let t = "/khc/index/brandTaskInfo";
-  // let a = {
-  //   brandId: "66666",
-  //   t: Date.now()//此时间戳和url后面的&t=一致
-  // };
-  let str = ''
-  const cc = Object.keys(a);
-  cc.map((item, index) => {
-    str += `${item}=${a[item]}${index + 1 !== cc.length ? '&' : ''}`;
-  })
+function taskUrl(body = {}) {
   return {
-    url: `${JD_API_HOST}${t}?${str}`,
+    url: `${JD_API_HOST}?appid=guardian-starjd&functionId=carnivalcity_jd_prod&body=${JSON.stringify(body)}&t=${Date.now()}&loginType=2`,
     headers: {
-      "accept": "application/json, text/plain, */*",
-      "accept-encoding": "gzip, deflate, br",
-      "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-      "referer": "https://carnivalcity.m.jd.com/",
-      "sec-fetch-dest": "empty",
-      "sec-fetch-mode": "cors",
-      "sec-fetch-site": "same-origin",
-      "Cookie": cookie,
-      "User-Agent": "jdapp;android;9.4.4;10;3b78ecc3f490c7ba;network/UNKNOWN;model/M2006J10C;addressid/138543439;aid/3b78ecc3f490c7ba;oaid/7d5870c5a1696881;osVer/29;appBuild/85576;psn/3b78ecc3f490c7ba|541;psq/2;uid/3b78ecc3f490c7ba;adk/;ads/;pap/JA2015_311210|9.2.4|ANDROID 10;osv/10;pv/548.2;jdv/0|iosapp|t_335139774|appshare|CopyURL|1606277982178|1606277986;ref/com.jd.lib.personal.view.fragment.JDPersonalFragment;partner/xiaomi001;apprpd/MyJD_Main;Mozilla/5.0 (Linux; Android 10; M2006J10C Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045227 Mobile Safari/537.36",
-      sign: za(a, o, t).toString(),
-      timestamp: r,
-    }
-  }
-}
-function taskPostUrl(t, a) {
-  const r = Date.now().toString();
-  let o = "07035cabb557f09a5" + r;
-  // let t = "/khc/task/doQuestion";
-  // let a = "brandId=555555&questionId=2&result=1"
-  return {
-    url: `${JD_API_HOST}${t}`,
-    body: a,
-    headers: {
+      "Host": "api.m.jd.com",
       "Accept": "application/json, text/plain, */*",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Accept-Language": "zh-cn",
-      "Connection": "keep-alive",
       "Content-Type": "application/x-www-form-urlencoded",
-      "Host": "carnivalcity.m.jd.com",
       "Origin": "https://carnivalcity.m.jd.com",
-      "Referer": "https://carnivalcity.m.jd.com/?lng=113.325695&lat=23.198318&sid=dfb50c19b37544d6ce10759e26c451dw&un_area=19_1601_50258_62858",
-      "User-Agent": "jdapp;iPhone;9.4.4;14.3;88732f840b77821b345bf07fd71f609e6ff12f43;network/4g;ADID/B28DA848-0DA0-4AAA-AE7E-A6F55695C590;supportApplePay/0;hasUPPay/0;hasOCPay/0;model/iPhone11,8;addressid/2005183373;supportBestPay/0;appBuild/167588;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1",
-      "Cookie": cookie,
-      sign: za(a, o, t).toString(),
-      timestamp: r,
+      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      "Referer": "https://carnivalcity.m.jd.com/",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Cookie": cookie
     }
   }
 }
