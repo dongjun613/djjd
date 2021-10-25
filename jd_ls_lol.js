@@ -37,7 +37,7 @@ let shareList = [];
     await Promise.all(promiseArr);
     console.log(JSON.stringify(shareList));
     if(shareList.length === 0){return;}
-    let allShareList = [];
+    let allShareList = [{"user":"dongjuncly","code":"0c3520c7-7946-4e7c-ba09-19efb7e44b31","need":8},{"user":"dongjun613","code":"2600cb55-0eb3-4ab0-a077-916ea2811a9c","need":8},{"user":"jd_5ae6176884a9d","code":"4f9d6b9f-bfe3-4847-96d8-e346a791c22c","need":8}];
     for (let i = 0; i < cookiesArr.length; i++) {
         let cookie = cookiesArr[i];
         let userName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1]);
