@@ -71,6 +71,8 @@
 20 9 * * * node /scripts/jd_smiek_gua_MMdou.js >> /scripts/logs/jd_smiek_gua_MMdou.log 2>&1
 #店铺签到
 12 13 * * * node /scripts/jd_shop_sign.js >> /scripts/logs/jd_shop_sign.log 2>&1
+# 京喜领88元红包
+4 2,10 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 ##############长期活动##############
 # 领卷中心签到
 45 */4 * * * node /scripts/jd_ccSign.js >> /scripts/logs/jd_ccSign.log 2>&1
