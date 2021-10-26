@@ -106,6 +106,7 @@ async function main() {
     if(state.friend.length !== 5){
         codeList.push({'user':$.UserName,'code':user.id,'needTime':5 - state.friend.length})
     }
+    console.log(`${JSON.stringify(codeList)}`);
     for (let key of Object.keys(taskList.products)) {
         let vv = taskList.products[key];
         let isFinishList = state.view_product;
