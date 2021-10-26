@@ -6,7 +6,7 @@ cron 23 11,12 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/jd
 * */
 const $ = new Env('潮玩儿制躁团');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let cookiesArr = [], cookie='',codeList = [],authorizationInfo = {},tokenInfo={};
+let cookiesArr = [], cookie='',codeList = [{"user":"dongjun613","code":572437,"needTime":5},{"user":"dongjuncly","code":572639,"needTime":5},{"user":"jd_5ae6176884a9d","code":572838,"needTime":5}],authorizationInfo = {},tokenInfo={};
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
