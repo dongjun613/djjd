@@ -89,9 +89,10 @@
 # 东东农场
 15 6-18/6 * * * node /scripts/jd_fruit.js >> /scripts/logs/jd_fruit.log 2>&1
 # 宠汪汪
-57 7,15,23 * * * node /scripts/jd_hello_wind_joy_reward_20.js >> /scripts/logs/jd_hello_wind_joy_reward_20.log 2>&1
-0 0,8,16 * * * node /scripts/jd_hello_wind_joy_reward_new.js >> /scripts/logs/jd_hello_wind_joy_reward_new.log 2>&1
-04 16 * * * node /scripts/jd_hello_wind_joy_reward_20.js >> /scripts/logs/jd_hello_wind_joy_reward_20.log 2>&1
+56 7,15 * * * node /scripts/jd_dj_joy_reward_20.js >> /scripts/logs/jd_dj_joy_reward_20.log 2>&1
+59 7,15 * * * node /scripts/jd_dj_joy_reward_20.js >> /scripts/logs/jd_dj_joy_reward_20.log 2>&1
+56 23 * * * node /scripts/jd_dj_joy_reward_new.js >> /scripts/logs/jd_dj_joy_reward_new.log 2>&1
+59 23 * * * node /scripts/jd_dj_joy_reward_new.js >> /scripts/logs/jd_dj_joy_reward_new.log 2>&1
 # 宠汪汪赛跑
 45 14,19 * * * node /scripts/jd_joy_run.js >> /scripts/logs/jd_joy_run.log 2>&1
 #宠汪汪任务喂食
