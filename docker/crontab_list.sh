@@ -51,8 +51,6 @@
 36 10 * * * node /scripts/jd_wind8_wind_europeancup.js >> /scripts/logs/jd_europeancup.log 2>&1
 #开卡瓜分
 30 16 1 7 * node /scripts/jd_wind5_zooCaptain01.js >> /scripts/logs/jd_wind5_zooCaptain01.log 2>&1
-#汪汪乐园养joy
-11 1-23/4 * * * node /scripts/jd_wind_joypark_joy.js >> /scripts/logs/jd_wind_joypark_joy.log 2>&1
 #汪汪乐园开工位
 1 13 7 7 * node /scripts/jd_wind_joypark_open.js >> /scripts/logs/jd_wind_joypark_open.log 2>&1
 #汪汪乐园每日任务
@@ -97,8 +95,6 @@
 45 14,19 * * * node /scripts/jd_joy_run.js >> /scripts/logs/jd_joy_run.log 2>&1
 #宠汪汪任务喂食
 35 */4 * * * node /scripts/jd_joy.js >> /scripts/logs/jd_joy.log 2>&1
-#宠汪汪偷狗粮
-10 0-21/3 * * * node /scripts/jd_joy_steal.js >> /scripts/logs/jd_joy_steal.log 2>&1
 # 摇钱树
 23 */2 * * * node /scripts/jd_moneyTree.js >> /scripts/logs/jd_moneyTree.log 2>&1
 # 东东萌宠
@@ -139,8 +135,6 @@
 23 1,12,22 * * * node /scripts/jd_bean_home.js >> /scripts/logs/jd_bean_home.log 2>&1
 # 微信小程序京东赚赚
 6 0-5/1,11 * * * node /scripts/jd_jdzz.js >> /scripts/logs/jd_jdzz.log 2>&1
-# crazyJoy自动每日任务
-30 7,23 * * * node /scripts/jd_crazy_joy.js >> /scripts/logs/jd_crazy_joy.log 2>&1
 # 导到所有互助码
 23 7 * * * node /scripts/jd_get_share_code.js >> /scripts/logs/jd_get_share_code.log 2>&1
 # 口袋书店
@@ -159,8 +153,6 @@
 #41 0,23 * * * node /scripts/jd_price.js >> /scripts/logs/jd_price.log 2>&1
 #京东极速版签到+赚现金任务
 21 1,6 * * * node /scripts/jd_speed_sign.js >> /scripts/logs/jd_speed_sign.log 2>&1
-#监控crazyJoy分红
-10 12 * * * node /scripts/jd_crazy_joy_bonus.js >> /scripts/logs/jd_crazy_joy_bonus.log 2>&1
 #京喜财富岛
 48 0-23/2 * * * node /scripts/jd_smiek_gua_wealth_island.js >> /scripts/logs/jd_smiek_gua_wealth_island.log 2>&1
 48 0-23/3 * * * node /scripts/jd_ls_cfd.js >> /scripts/logs/jd_ls_cfd.log 2>&1
@@ -186,8 +178,6 @@
 30 7 * * * node /scripts/jd_ddnc_farmpark.js >> /scripts/logs/jd_ddnc_farmpark.log 2>&1
 #京东到家鲜豆任务
 0 0 */1 * * node /scripts/jd_winddj_bean.js >> /scripts/logs/jd_winddj_bean.log 2>&1
-#京东试用
-15 12 * * * node /scripts/jd_wind1_wind_try.js >> /scripts/logs/jd_wind1_wind_try.log 2>&1
 #京东零食街
 15 11 * * * node /scripts/jd_lsj.js >> /scripts/logs/jd_lsj.log 2>&1
 #柠檬全民挖现金
