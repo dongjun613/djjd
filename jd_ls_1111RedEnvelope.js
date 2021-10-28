@@ -184,7 +184,7 @@ function shareUnionCoupon() {
           let res = $.toObj(data,data);
           if(typeof res == 'object'){
             if(res.code == 0 && res.data && res.data.shareUrl){
-              $.shareCode = res.data.shareUrl.match(/3C7eCOr\?s=([^&]+)/) && res.data.shareUrl.match(/3C7eCOr\?s=([^&]+)/)[1] || ''
+              $.shareCode = 'DNt6l'
               console.log('分享码:'+$.shareCode)
               if($.shareCode) console.log(`以下账号会助力【京东账号${$.index}】${$.nickName || $.UserName}`)
             }
