@@ -10,7 +10,6 @@
 10 9,15,19 * * * node /scripts/jd_ls_lol.js >> /scripts/logs/jd_ls_lol.log 2>&1
 # 狂欢节
 0 0-18/6 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
-#10 10,11 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
 # 惊喜大作战
 50 1 * * * node /scripts/jd_ls_jxdzz.js >> /scripts/logs/jd_ls_jxdzz.log 2>&1
 # 时尚宠粉趴
