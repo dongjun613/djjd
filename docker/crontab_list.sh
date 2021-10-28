@@ -4,6 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 双十一红包
+1 0,12,18 * * * node /scripts/jd_ls_1111RedEnvelope.js >> /scripts/logs/jd_ls_1111RedEnvelope.log 2>&1
 # 潮玩儿制躁团
 23 11,12 * * * node /scripts/jd_ls_zzt.js >> /scripts/logs/jd_ls_zzt.log 2>&1
 # 电竞预言家
