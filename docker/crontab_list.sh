@@ -25,8 +25,6 @@
 46 0,9 * * * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
 # 限时领金豆
 23 0,9 * * * node /scripts/jd_ls_xsqjd.js >> /scripts/logs/jd_ls_xsqjd.log 2>&1
-# 城城分现金
-0 0-23/5,22 * 10 * node /scripts/jd_city.js >> /scripts/logs/jd_city.log 2>&1
 # 扭蛋 活动时间：2021-10-11 12:44 至 2021-11-10 12:44
 10 17 * * * node /scripts/jd_ls_lucky_egg.js >> /scripts/logs/jd_ls_lucky_egg.log 2>&1
 # 一加手机 活动时间：10.8 - 11.13
@@ -177,7 +175,7 @@
 # 领金贴
 5 0 * * * node /scripts/jd_jin_tie.js >> /scripts/logs/jd_jin_tie.log 2>&1
 #京喜牧场
-15 */2 * * * node /scripts/jd_wind9_wind_windmc.js >> /scripts/logs/jd_jxmc.log 2>&1
+15 */2 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 #东东乐园
 30 7 * * * node /scripts/jd_ddnc_farmpark.js >> /scripts/logs/jd_ddnc_farmpark.log 2>&1
 #京东到家鲜豆任务
