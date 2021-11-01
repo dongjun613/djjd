@@ -6,6 +6,10 @@
 ##############短期活动##############
 # 品质女装
 23 1,11 * * * node /scripts/jd_ls_pznz.js >> /scripts/logs/jd_ls_pznz.log 2>&1
+# 品质女装
+23 1,11 * * * node /scripts/jd_ls_huiju11.js >> /scripts/logs/jd_ls_huiju11.log 2>&1
+# 品质女装
+23 1,11 * * * node /scripts/jd_ls_huiju2.js >> /scripts/logs/jd_ls_huiju2.log 2>&1
 # 双十一红包
 1 0,12,18 * * * node /scripts/jd_ls_1111RedEnvelope.js >> /scripts/logs/jd_ls_1111RedEnvelope.log 2>&1
 # 潮玩儿制躁团
