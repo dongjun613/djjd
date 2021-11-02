@@ -171,7 +171,7 @@ async function pasture() {
         $.step = isNew($.currentStep) ? isNew($.currentStep, true) : $.homeInfo.maintaskId
         await takeGetRequest('DoMainTask');
         for (let i = 0; i < 20; i++) {
-          if ($.DoMainTask.maintaskId !== "pause") {
+          if ($.DoMainTask.maintaskId !== null && $.DoMainTask.maintaskId !== undefined && $.DoMainTask.maintaskId !== "pause") {
             await $.wait(2000)
             $.currentStep = $.DoMainTask?.finishedtaskId
             $.step = $.DoMainTask.maintaskId
