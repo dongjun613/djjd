@@ -4,6 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 星推官
+1 7,13 * * * node /scripts/jd_xtgsign.js >> /scripts/logs/jd_xtgsign.log 2>&1
 # 品质女装
 23 1,11 * * * node /scripts/jd_ls_pznz.js >> /scripts/logs/jd_ls_pznz.log 2>&1
 # 品质女装
