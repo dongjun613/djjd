@@ -1305,7 +1305,7 @@ function doTask(taskId, type = 1) {
                     console.log(`${JSON.stringify(err)}`)
                     console.log(`${$.name} DoTask API请求失败，请检查网路重试`)
                 } else {
-                    data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
+                    //data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
                 }
             } catch (e) {
                 $.logErr(e, resp)
