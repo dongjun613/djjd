@@ -245,7 +245,7 @@ await $.wait(8000)
 async function readShareCodes(){
   return new Promise((resolve) => {
     let url = {
-   		url: `https://raw.githubusercontent.com/Ariszy/TGBOT/main/sjjc.js11`,
+   		url: `https://raw.githubusercontent.com/Ariszy/TGBOT/main/sjjc.js`,
    	}
    $.get(url,async(error, response, data) =>{
     try{
@@ -280,14 +280,14 @@ async function formatcode(){
 await readShareCodes();
 var newsharecodes = [];
 var arr = CodeArr
-var count = arr.length;
-for (var i = 0; i < (5 - cookiesArr.length); i++) {
+var count = 1;
+for (var i = 0; i < (1 - cookiesArr.length); i++) {
     var index = ~~(Math.random() * count) + i;
     newsharecodes[i] = arr[index];
     arr[index] = arr[i];
     count--;
 }
-console.log("随机取出"+(5 - cookiesArr.length)+"个助力码,账号"+`${$.UserName}即将助力【`+newsharecodes+"】\n");
+console.log("随机取出"+(1 - cookiesArr.length)+"个助力码,账号"+`${$.UserName}即将助力【`+newsharecodes+"】\n");
 for(let i = 0; i < newsharecodes.length; i++){
 console.log(`开始第${i+1}次随机助力`+newsharecodes[i]+"\n")
 await dosupport(newsharecodes[i])
