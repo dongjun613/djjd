@@ -4,6 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 特物
+21 5,12 * * * node /scripts/jd_ls_superBrand.js >> /scripts/logs/jd_ls_superBrand.log 2>&1
 # 手机竞猜
 40 7,13 * * * node /scripts/jd_ls_sjjc.js >> /scripts/logs/jd_ls_sjjc.log 2>&1
 # 星推官
