@@ -17,7 +17,7 @@
 # 品质女装
 23 1,11 * * * node /scripts/jd_ls_huiju2.js >> /scripts/logs/jd_ls_huiju2.log 2>&1
 # 双十一红包
-1 0,12,18 * * * node /scripts/jd_ls_1111RedEnvelope.js >> /scripts/logs/jd_ls_1111RedEnvelope.log 2>&1
+1 0,12,18 * * * node /scripts/jd_ls_red.js.js >> /scripts/logs/jd_ls_red.log 2>&1
 # 潮玩儿制躁团
 23 11,12 * * * node /scripts/jd_ls_zzt.js >> /scripts/logs/jd_ls_zzt.log 2>&1
 # 电竞预言家
