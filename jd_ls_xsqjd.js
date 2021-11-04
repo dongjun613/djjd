@@ -1,9 +1,11 @@
 /*
 * 活动：APP - 京东超市 - 限时抢京豆
 * 第一个CK助力作者，其他CK助力第一个CK
+cron 23 7,9 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_xsqjd.js
 * */
 const $ = new Env('限时抢京豆');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
@@ -26,7 +28,7 @@ let autoCode = '',projectId = '',helpId = '';
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
         return;
     }
-    if(Date.now() > 1634832000000){
+    if(Date.now() > 1637424000000){
         console.log(`活动结束`);
         return;
     }
@@ -48,7 +50,6 @@ let autoCode = '',projectId = '',helpId = '';
     if(JSON.stringify(ownCode) === '{}'){
         return ;
     }
-    console.log(JSON.stringify(codeList))
     if(cookiesArr.length>0){
         const promiseArr = cookiesArr.map((ck, index) => help(ck));
         await Promise.all(promiseArr);
@@ -115,7 +116,6 @@ async function main(ck){
         }
         if(oneTask.type === '2'){
             codeList.push(oneTask.assistId);
-            console.log(`${oneTask.assistId}`);
             if(JSON.stringify(ownCode) === '{}' && mainPin === userName){
                 ownCode = {'user':userName,'projectId':projectId,'assignmentId':oneTask.assignmentId,"itemId":oneTask.assistId,'type':2}
             }
@@ -179,7 +179,7 @@ async function takeRequest(functionId,body,ck){
                 }
             } catch (e) {
                 console.log(data);
-                $.logErr(e, resp)
+                //$.logErr(e, resp)
             } finally {
                 resolve(data.result || {});
             }
@@ -223,7 +223,7 @@ function getAuthorShareCode(url) {
 
 function getRandomArrayElements(arr, count) {
     var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
-    while (i-- > min) {
+    while (i-- > min) {getRandomArrayElements
         index = Math.floor((i + 1) * Math.random());
         temp = shuffled[index];
         shuffled[index] = shuffled[i];
