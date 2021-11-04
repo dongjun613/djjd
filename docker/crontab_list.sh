@@ -4,12 +4,18 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 家电盲盒
+20 9 1-20 11 * node /scripts/jd_ls_dqmh.js >> /scripts/logs/jd_ls_dqmh.log 2>&1
+# 魔方兑换
+0 0,7 * * * node /scripts/jd_ls_mofang_exchange.js >> /scripts/logs/jd_ls_mofang_exchange.log 2>&1
+# 牛牛福利
+40 8,17 * * * node /scripts/jd_ls_nnfls.js >> /scripts/logs/jd_ls_nnfls.log 2>&1
 # 特物
 21 5,12 * * * node /scripts/jd_ls_superBrand.js >> /scripts/logs/jd_ls_superBrand.log 2>&1
 # 手机竞猜
 40 7,13 * * * node /scripts/jd_ls_sjjc.js >> /scripts/logs/jd_ls_sjjc.log 2>&1
 # 星推官
-1 7,13 * * * node /scripts/jd_xtgsign.js >> /scripts/logs/jd_xtgsign.log 2>&1
+1 7,13 * * * node /scripts/jd_ls_xtg.js >> /scripts/logs/jd_ls_xtg.log 2>&1
 # 品质女装
 23 1,11 * * * node /scripts/jd_ls_pznz.js >> /scripts/logs/jd_ls_pznz.log 2>&1
 # 品质女装
