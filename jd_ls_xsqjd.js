@@ -50,6 +50,7 @@ let autoCode = '',projectId = '',helpId = '';
     if(JSON.stringify(ownCode) === '{}'){
         return ;
     }
+    console.log(JSON.stringify(codeList))
     if(cookiesArr.length>0){
         const promiseArr = cookiesArr.map((ck, index) => help(ck));
         await Promise.all(promiseArr);
