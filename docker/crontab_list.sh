@@ -88,6 +88,8 @@
 # 京喜领88元红包
 4 2,10 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 ##############长期活动##############
+#京喜签到
+11 0 * * * node /scripts/jx_sign.js >> /scripts/logs/jx_sign.log 2>&1
 # 领卷中心签到
 45 */4 * * * node /scripts/jd_ccSign.js >> /scripts/logs/jd_ccSign.log 2>&1
 # 签到
