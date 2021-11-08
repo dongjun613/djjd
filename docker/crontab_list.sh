@@ -55,6 +55,8 @@
 10 5,10 * * * node /scripts/jd_GoldcoinToGift.js >> /scripts/logs/jd_GoldcoinToGift.log 2>&1
 # 东东游戏
 17 12-23/4 * * * node /scripts/jd_smiek_gua_ddgame.js >> /scripts/logs/jd_smiek_gua_ddgame.log 2>&1
+# 许愿池
+40 0,2 * * * node /scripts/jd_ls_wish.js >> /scripts/logs/jd_ls_wish.log 2>&1
 # 动人影像
 43 15 13-26 9 * node /scripts/jd_star_wind_film_museum.js >> /scripts/logs/jd_star_wind_film_museum.log 2>&1
 # 东东世界
