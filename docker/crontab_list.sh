@@ -4,6 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 热血心跳,狂解压
+10 2,9,17 * * * node /scripts/jd_ls_vivo.js >> /scripts/logs/jd_ls_vivo.log 2>&1
 # 家电盲盒
 20 9 1-20 11 * node /scripts/jd_ls_dqmh.js >> /scripts/logs/jd_ls_dqmh.log 2>&1
 # 魔方兑换
