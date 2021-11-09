@@ -32,10 +32,10 @@ let cookiesArr = [], cookie = '', jdFruitShareArr = [], isBox = false, notify, n
 //此此内容是IOS用户下载脚本到本地使用，填写互助码的地方，同一京东账号的好友互助码请使用@符号隔开。
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
 let shareCodes = [ // 这个列表填入你要助力的好友的shareCode
-   //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
-  '5e6372f6d07d4ebe94735ae1b38b755a@629db3bdd6a0467abd4d86c54f5111ff@b9ac46c13afd4b7e84bddaf6400ed4f0',
+                   //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
+  '7c3b3c449fd45448736a6b870bd9da9@80ac4d3970114f1abdd063df69bc48e2',
   //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
-  '5e6372f6d07d4ebe94735ae1b38b755a@629db3bdd6a0467abd4d86c54f5111ff@b9ac46c13afd4b7e84bddaf6400ed4f0',
+  '7c3b3c449fd45448736a6b870bd9da9@80ac4d3970114f1abdd063df69bc48e2',
 ]
 let message = '', subTitle = '', option = {}, isFruitFinished = false;
 const retainWater = 100;//保留水滴大于多少g,默认100g;
@@ -1310,7 +1310,7 @@ function timeFormat(time) {
 }
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `http://47.106.222.216:18880/api/v2/jd/farm/read/${randomCount}/`, timeout: 10000,}, (err, resp, data) => {
+    $.get({url: `http://transfer.nz.lu/farm`, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))

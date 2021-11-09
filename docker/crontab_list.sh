@@ -104,6 +104,7 @@
 6 0,23 * * * node /scripts/jd_club_lottery.js >> /scripts/logs/jd_club_lottery.log 2>&1
 # 东东农场
 15 6-18/6 * * * node /scripts/jd_fruit.js >> /scripts/logs/jd_fruit.log 2>&1
+36 20 * * * node /scripts/jd_zero_fruit.js >> /scripts/logs/jd_zero_fruit.log 2>&1
 # 宠汪汪
 56 7,15 * * * node /scripts/jd_dj_joy_reward_20.js >> /scripts/logs/jd_dj_joy_reward_20.log 2>&1
 59 7,15 * * * node /scripts/jd_dj_joy_reward_20.js >> /scripts/logs/jd_dj_joy_reward_20.log 2>&1
