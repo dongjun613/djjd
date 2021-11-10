@@ -4,6 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+#饭粒
+20 0,14 * * * node /scripts/jd_ls_fanli.js >> /scripts/logs/jd_ls_fanli.log 2>&1
 # 热血心跳,狂解压
 10 2,9,17 * * * node /scripts/jd_ls_vivo.js >> /scripts/logs/jd_ls_vivo.log 2>&1
 # 家电盲盒
