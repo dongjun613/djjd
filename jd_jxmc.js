@@ -903,7 +903,7 @@ function shareCodesFormat() {
     //   $.newShareCodes = [...new Set([...$.inviteCodeList, ...($.res || []), ...(readShareCodeRes.data || [])])];
     // } else {
     // }
-    $.newShareCodes = [...new Set([...$.inviteCodeList, ...($.res || [])])];
+    $.newShareCodes = [...new Set([...($.res || []), ...$.inviteCodeList])];
     console.log(`\n您将要助力的好友${JSON.stringify($.newShareCodes)}`)
     resolve();
   })
