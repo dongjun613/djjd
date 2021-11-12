@@ -26,15 +26,10 @@
 23 1,11 * * * node /scripts/jd_ls_huiju11.js >> /scripts/logs/jd_ls_huiju11.log 2>&1
 # 品质女装
 23 1,11 * * * node /scripts/jd_ls_huiju2.js >> /scripts/logs/jd_ls_huiju2.log 2>&1
-# 双十一红包
-1 0,12,18 * * * node /scripts/jd_ls_red.js.js >> /scripts/logs/jd_ls_red.log 2>&1
 # 潮玩儿制躁团
 23 11,12 * * * node /scripts/jd_ls_zzt.js >> /scripts/logs/jd_ls_zzt.log 2>&1
 # 电竞预言家
 10 9,15,19 * * * node /scripts/jd_ls_lol.js >> /scripts/logs/jd_ls_lol.log 2>&1
-# 狂欢节
-0 0-18/6 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
-10 10,11 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
 # 惊喜大作战
 50 1 * * * node /scripts/jd_ls_jxdzz.js >> /scripts/logs/jd_ls_jxdzz.log 2>&1
 # 时尚宠粉趴
@@ -43,8 +38,6 @@
 # 20 3 * * * node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
 # APP-美妆馆-右侧浮窗
 23 9,10 * * * node /scripts/jd_ls_selectionOfficer.js >> /scripts/logs/jd_ls_selectionOfficer.log 2>&1
-# 预售福利机
-46 0,9 * * * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
 # 限时领金豆
 23 0,9 * * * node /scripts/jd_ls_xsqjd.js >> /scripts/logs/jd_ls_xsqjd.log 2>&1
 # 扭蛋 活动时间：2021-10-11 12:44 至 2021-11-10 12:44
