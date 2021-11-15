@@ -34,12 +34,8 @@
 50 1 * * * node /scripts/jd_ls_jxdzz.js >> /scripts/logs/jd_ls_jxdzz.log 2>&1
 # 时尚宠粉趴
 20 2 * * * node /scripts/jd_ls_fashion.js >> /scripts/logs/jd_ls_fashion.log 2>&1
-# 环游记
-# 20 3 * * * node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
 # APP-美妆馆-右侧浮窗
 23 9,10 * * * node /scripts/jd_ls_selectionOfficer.js >> /scripts/logs/jd_ls_selectionOfficer.log 2>&1
-# 限时领金豆
-23 0,9 * * * node /scripts/jd_ls_xsqjd.js >> /scripts/logs/jd_ls_xsqjd.log 2>&1
 # 扭蛋 活动时间：2021-10-11 12:44 至 2021-11-10 12:44
 10 17 * * * node /scripts/jd_ls_lucky_egg.js >> /scripts/logs/jd_ls_lucky_egg.log 2>&1
 # 一加手机 活动时间：10.8 - 11.13
