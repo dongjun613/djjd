@@ -18,8 +18,6 @@
 21 5,12 * * * node /scripts/jd_ls_superBrand.js >> /scripts/logs/jd_ls_superBrand.log 2>&1
 # 手机竞猜
 40 7,13 * * * node /scripts/jd_ls_sjjc.js >> /scripts/logs/jd_ls_sjjc.log 2>&1
-# 星推官
-1 7,13 * * * node /scripts/jd_ls_xtg.js >> /scripts/logs/jd_ls_xtg.log 2>&1
 # 品质女装
 23 1,11 * * * node /scripts/jd_ls_pznz.js >> /scripts/logs/jd_ls_pznz.log 2>&1
 # 品质女装
