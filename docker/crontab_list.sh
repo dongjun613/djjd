@@ -90,16 +90,16 @@
 # 东东农场
 15 6-18/6 * * * node /scripts/jd_fruit.js >> /scripts/logs/jd_fruit.log 2>&1
 # 宠汪汪
-56 7,15 * * * node /scripts/jd_dj_joy_reward_20.js >> /scripts/logs/jd_dj_joy_reward_20.log 2>&1
-59 7,15 * * * node /scripts/jd_dj_joy_reward_20.js >> /scripts/logs/jd_dj_joy_reward_20.log 2>&1
-56 23 * * * node /scripts/jd_dj_joy_reward_new.js >> /scripts/logs/jd_dj_joy_reward_new.log 2>&1
-59 23 * * * node /scripts/jd_dj_joy_reward_new.js >> /scripts/logs/jd_dj_joy_reward_new.log 2>&1
+#56 7,15 * * * node /scripts/jd_dj_joy_reward_20.js >> /scripts/logs/jd_dj_joy_reward_20.log 2>&1
+#59 7,15 * * * node /scripts/jd_dj_joy_reward_20.js >> /scripts/logs/jd_dj_joy_reward_20.log 2>&1
+#56 23 * * * node /scripts/jd_dj_joy_reward_new.js >> /scripts/logs/jd_dj_joy_reward_new.log 2>&1
+#59 23 * * * node /scripts/jd_dj_joy_reward_new.js >> /scripts/logs/jd_dj_joy_reward_new.log 2>&1
 # 宠汪汪赛跑
-45 9,14,19 * * * node /scripts/jd_joy_run.js >> /scripts/logs/jd_joy_run.log 2>&1
+#45 9,14,19 * * * node /scripts/jd_joy_run.js >> /scripts/logs/jd_joy_run.log 2>&1
 #宠汪汪任务喂食
-35 */4 * * * node /scripts/jd_joy.js >> /scripts/logs/jd_joy.log 2>&1
+#35 */4 * * * node /scripts/jd_joy.js >> /scripts/logs/jd_joy.log 2>&1
 #宠汪汪偷狗粮
-10 5,9,13 * * * node /scripts/jd_joy_steal.js >> /scripts/logs/jd_joy_steal.log 2>&1
+#10 5,9,13 * * * node /scripts/jd_joy_steal.js >> /scripts/logs/jd_joy_steal.log 2>&1
 # 摇钱树
 23 */2 * * * node /scripts/jd_moneyTree.js >> /scripts/logs/jd_moneyTree.log 2>&1
 # 东东萌宠
