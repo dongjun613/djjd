@@ -22,8 +22,6 @@
 23 1,11 * * * node /scripts/jd_ls_huiju11.js >> /scripts/logs/jd_ls_huiju11.log 2>&1
 # 品质女装
 23 1,11 * * * node /scripts/jd_ls_huiju2.js >> /scripts/logs/jd_ls_huiju2.log 2>&1
-# 潮玩儿制躁团
-23 11,12 * * * node /scripts/jd_ls_zzt.js >> /scripts/logs/jd_ls_zzt.log 2>&1
 # 电竞预言家
 10 9,15,19 * * * node /scripts/jd_ls_lol.js >> /scripts/logs/jd_ls_lol.log 2>&1
 # 惊喜大作战
@@ -32,10 +30,6 @@
 20 2 * * * node /scripts/jd_ls_fashion.js >> /scripts/logs/jd_ls_fashion.log 2>&1
 # APP-美妆馆-右侧浮窗
 23 9,10 * * * node /scripts/jd_ls_selectionOfficer.js >> /scripts/logs/jd_ls_selectionOfficer.log 2>&1
-# 扭蛋 活动时间：2021-10-11 12:44 至 2021-11-10 12:44
-10 17 * * * node /scripts/jd_ls_lucky_egg.js >> /scripts/logs/jd_ls_lucky_egg.log 2>&1
-# 一加手机 活动时间：10.8 - 11.13
-10 14 * * * node /scripts/jd_ls_yijia.js >> /scripts/logs/jd_ls_yijia.log 2>&1
 # 京东小魔方
 31 2,8 * * * node /scripts/jd_ls_mf.js >> /scripts/logs/jd_ls_mf.js.log 2>&1
 # 攥金币
