@@ -155,7 +155,6 @@
 #京东极速版签到+赚现金任务
 21 1,6 * * * node /scripts/jd_speed_sign.js >> /scripts/logs/jd_speed_sign.log 2>&1
 #京喜财富岛
-10 0-23/2 * * * node /scripts/jd_smiek_gua_wealth_island.js >> /scripts/logs/jd_smiek_gua_wealth_island.log 2>&1
 20 0-23/3 * * * node /scripts/jd_ls_cfd.js >> /scripts/logs/jd_ls_cfd.log 2>&1
 30 0-23/3 * * * node /scripts/jd_ls_cfd_loop.js >> /scripts/logs/jd_ls_cfd_loop.log 2>&1
 40 0-23/3 * * * node /scripts/jd_ls_cfd_mooncake.js >> /scripts/logs/jd_ls_cfd_mooncake.log 2>&1
