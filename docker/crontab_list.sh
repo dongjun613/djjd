@@ -30,6 +30,7 @@
 20 2 * * * node /scripts/jd_ls_fashion.js >> /scripts/logs/jd_ls_fashion.log 2>&1
 # APP-美妆馆-右侧浮窗
 23 9,10 * * * node /scripts/jd_ls_selectionOfficer.js >> /scripts/logs/jd_ls_selectionOfficer.log 2>&1
+43 10 * * * node /scripts/jd_ls_sign_graphics1.js >> /scripts/logs/jd_ls_sign_graphics1.log 2>&1
 # 京东小魔方
 31 2,8 * * * node /scripts/jd_ls_mf.js >> /scripts/logs/jd_ls_mf.js.log 2>&1
 # 攥金币
