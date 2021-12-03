@@ -4,6 +4,7 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+35 1,23 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 #饭粒
 20 0,14 * * * node /scripts/jd_ls_fanli.js >> /scripts/logs/jd_ls_fanli.log 2>&1
 # 热血心跳,狂解压
@@ -22,8 +23,6 @@
 23 1,11 * * * node /scripts/jd_ls_huiju11.js >> /scripts/logs/jd_ls_huiju11.log 2>&1
 # 品质女装
 23 1,11 * * * node /scripts/jd_ls_huiju2.js >> /scripts/logs/jd_ls_huiju2.log 2>&1
-# 电竞预言家
-10 9,15,19 * * * node /scripts/jd_ls_lol.js >> /scripts/logs/jd_ls_lol.log 2>&1
 # 惊喜大作战
 50 1 * * * node /scripts/jd_ls_jxdzz.js >> /scripts/logs/jd_ls_jxdzz.log 2>&1
 # 时尚宠粉趴
