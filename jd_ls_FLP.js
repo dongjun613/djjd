@@ -170,6 +170,7 @@ function task(function_id, body, isCommon = 0) {
                                         $.log("创建队伍成功")
                                         if($.index === 1){
                                             ownCode = data.data.signUuid;
+                                            console.log(ownCode)
                                         }
                                     }
                                     break;
@@ -186,6 +187,7 @@ function task(function_id, body, isCommon = 0) {
                                     $.activityContent = data.data;
                                     if($.index === 1){
                                         ownCode = data.data.signUuid;
+                                        console.log(ownCode);
                                     }
                                     // $.actorUuid = data.data.signUuid;
                                     // console.log(data.data.successRetList)
