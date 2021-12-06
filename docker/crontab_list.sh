@@ -4,6 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 飞利浦
+40 11,14 * * * node /scripts/jd_ls_FLP.js >> /scripts/logs/jd_ls_FLP.log 2>&1
 35 1,23 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 #饭粒
 20 0,14 * * * node /scripts/jd_ls_fanli.js >> /scripts/logs/jd_ls_fanli.log 2>&1
@@ -15,8 +17,6 @@
 40 8,17 * * * node /scripts/jd_ls_nnfls.js >> /scripts/logs/jd_ls_nnfls.log 2>&1
 # 特物
 21 5,12 * * * node /scripts/jd_ls_superBrand.js >> /scripts/logs/jd_ls_superBrand.log 2>&1
-# 手机竞猜
-40 7,13 * * * node /scripts/jd_ls_sjjc.js >> /scripts/logs/jd_ls_sjjc.log 2>&1
 # 品质女装
 23 1,11 * * * node /scripts/jd_ls_pznz.js >> /scripts/logs/jd_ls_pznz.log 2>&1
 # 品质女装
@@ -34,8 +34,6 @@
 31 2,8 * * * node /scripts/jd_ls_mf.js >> /scripts/logs/jd_ls_mf.js.log 2>&1
 # 攥金币
 10 5,10 * * * node /scripts/jd_GoldcoinToGift.js >> /scripts/logs/jd_GoldcoinToGift.log 2>&1
-# 东东游戏
-17 12-23/4 * * * node /scripts/jd_smiek_gua_ddgame.js >> /scripts/logs/jd_smiek_gua_ddgame.log 2>&1
 # 许愿池
 40 0,2 * * * node /scripts/jd_ls_wish.js >> /scripts/logs/jd_ls_wish.log 2>&1
 # 动人影像
