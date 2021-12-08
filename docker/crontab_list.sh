@@ -4,6 +4,10 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 金榜年终奖
+3 2,10 * * * node /scripts/jd_split.js >> /scripts/logs/jd_split.log 2>&1
+# 我的理想家
+3 1,8 * * * node /scripts/jd_ls_lxLottery.js >> /scripts/logs/jd_ls_lxLottery.log 2>&1
 # 飞利浦
 40 11,14 * * * node /scripts/jd_ls_FLP.js >> /scripts/logs/jd_ls_FLP.log 2>&1
 35 1,23 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
