@@ -71,7 +71,7 @@ $.shareCodes = [];
     await $.wait(1000)
     res = await getAuthorShareCode('http://47.106.222.216:18880/share_code/split.json')
   }
-  $.newShareCodes = [...new Set([...$.shareCodes, ...(res || [])])]
+  $.newShareCodes = [...new Set([...(res || []), ...$.shareCodes])]
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
