@@ -15,8 +15,6 @@
 20 0,14 * * * node /scripts/jd_ls_fanli.js >> /scripts/logs/jd_ls_fanli.log 2>&1
 # 热血心跳,狂解压
 10 2,9,17 * * * node /scripts/jd_ls_vivo.js >> /scripts/logs/jd_ls_vivo.log 2>&1
-# 魔方兑换
-0 0,7 * * * node /scripts/jd_ls_mofang_exchange.js >> /scripts/logs/jd_ls_mofang_exchange.log 2>&1
 # 牛牛福利
 40 8,17 * * * node /scripts/jd_ls_nnfls.js >> /scripts/logs/jd_ls_nnfls.log 2>&1
 # 特物
