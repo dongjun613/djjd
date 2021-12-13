@@ -63,7 +63,7 @@
 #早起福利
 30 6 * * * node /scripts/jd_wind_goodMorning.js >> /scripts/logs/jd_goodMorning.log 2>&1
 #半点红包雨
-30 0-23/1 * * * node /scripts/jd_wind2_long_half_redrain.js >> /scripts/logs/jd_wind2_long_half_redrain.log 2>&1
+30 0-23/1 * * * node /scripts/jd_ls_half_redrain.js >> /scripts/logs/jd_ls_half_redrain.log 2>&1
 # MM领京豆
 20 9 * * * node /scripts/jd_smiek_gua_MMdou.js >> /scripts/logs/jd_smiek_gua_MMdou.log 2>&1
 #店铺签到
