@@ -120,7 +120,7 @@ if ($.isNode()) {
         if ($.shareCodes && $.shareCodes.length) {
           console.log(`\n开始内部互助\n`)
           for (let j = 0; j < $.shareCodes.length; j++) {
-            if ($.shareCodes[j].num == $.domax) {
+            if ($.shareCodes[j].num === $.domax) {
               $.shareCodes.splice(j, 1)
               j--
               continue
@@ -537,7 +537,7 @@ async function requestAlgo() {
       "expandParams": ""
     })
   }
-  new Promise(async resolve => {
+  return new Promise(async resolve => {
     $.post(options, (err, resp, data) => {
       try {
         if (err) {
