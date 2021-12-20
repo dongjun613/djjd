@@ -7,7 +7,6 @@
 # 我的理想家
 3 1,8 * * * node /scripts/jd_ls_lxLottery.js >> /scripts/logs/jd_ls_lxLottery.log 2>&1
 # 飞利浦
-40 11,14 * * * node /scripts/jd_ls_FLP.js >> /scripts/logs/jd_ls_FLP.log 2>&1
 35 1,23 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 #饭粒
 20 0,14 * * * node /scripts/jd_ls_fanli.js >> /scripts/logs/jd_ls_fanli.log 2>&1
@@ -68,6 +67,10 @@
 12 13 * * * node /scripts/jd_shop_sign.js >> /scripts/logs/jd_shop_sign.log 2>&1
 # 京喜领88元红包
 4 2,10 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
+#京东极速版红包(活动时间：2021-5-5至2021-5-31)
+45 0,23 * * * node /scripts/jd_speed_redpocke.js >> /scripts/logs/jd_speed_redpocke.log 2>&1
+#见缝插针
+15 10 * * * node /scripts/jd_ls_jfcz.js >> /scripts/logs/jd_ls_jfcz.log 2>&1
 ##############长期活动##############
 #京喜签到
 11 0 * * * node /scripts/jx_sign.js >> /scripts/logs/jx_sign.log 2>&1
