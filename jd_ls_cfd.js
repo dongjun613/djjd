@@ -97,7 +97,7 @@ if ($.isNode()) {
         await $.wait(1000)
         res = await getAuthorShareCode('http://47.106.222.216:18880/share_code/jxcfd.json')
     }
-    $.strMyShareIds = [...(res && res.shareId || [])]
+    $.strMyShareIds = [...(res || [])]
     await shareCodesFormat()
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
