@@ -4,6 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
+# 城城分现金
+0 0-18/6 * * * node /scripts/jd_city.js >> /scripts/logs/jd_city.log 2>&1
 # 年货签到
 3 14 * * * node /scripts/jd_ls_nh_sign.js >> /scripts/logs/jd_ls_nh_sign.log 2>&1
 # 我的理想家
