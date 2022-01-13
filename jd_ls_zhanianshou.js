@@ -1,7 +1,4 @@
-if (!["true"].includes(process.env.JD_ZNS)) {
-    console.log("可能黑号,运行前最少手动进去过一次，避免自动运行请设置环境变量JD_ZNS为\"true\"来运行本脚本")
-    return
-}
+
 
 /*
 
