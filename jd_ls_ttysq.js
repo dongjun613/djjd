@@ -211,6 +211,7 @@ async function main() {
                         "beHelp": 0,
                         "helpId": $.taskId
                     })
+                    console.log(JSON.stringify($.shareCoseList));
                 }
             }
         }
