@@ -70,7 +70,7 @@ const JD_API_HOST = `https://m.jingxi.com`;
                 "helpId": $.taskId
             }
         })
-        $.shareCoseList = [...$.shareCoseList, ...authorCode]
+        $.shareCoseList = [...authorCode, ...$.shareCoseList]
     }
     console.log(`要助力的助力码${JSON.stringify($.shareCoseList.length)}个\n`)
     //助力任务
