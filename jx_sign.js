@@ -2,17 +2,21 @@
 京喜签到
 cron 20 1,8 * * * jx_sign.js
 活动入口：京喜APP-我的-京喜签到
+
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #京喜签到
 20 1,8 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jx_sign.js, tag=京喜签到, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+
 ================Loon==============
 [Script]
 cron "20 1,8 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jx_sign.js,tag=京喜签到
+
 ===============Surge=================
 京喜签到 = type=cron,cronexp="20 1,8 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jx_sign.js
+
 ============小火箭=========
 京喜签到 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jx_sign.js, cronexpr="20 1,8 * * *", timeout=3600, enable=true
  */
@@ -33,6 +37,7 @@ let cookiesArr = [], cookie = '', message;
 let UA, UAInfo = {}, isLoginInfo = {};
 $.shareCodes = [];
 $.blackInfo = {}
+$.appId = "0ac98";
 const JX_FIRST_RUNTASK = $.isNode() ? (process.env.JX_FIRST_RUNTASK && process.env.JX_FIRST_RUNTASK === 'xd' ? '5' : '1000') : ($.getdata('JX_FIRST_RUNTASK') && $.getdata('JX_FIRST_RUNTASK') === 'xd' ? '5' : '1000')
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -48,13 +53,7 @@ if ($.isNode()) {
     $.msg($.name, "【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取", "https://bean.m.jd.com/bean/signIndex.action", { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
     return;
   }
-  let res = await getAuthorShareCode('http://47.106.222.216:18880/share_code/jxSign.json')
-  if (!res) {
-    $.http.get({url: 'http://47.106.222.216:18880/share_code/jxSign.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
-    await $.wait(1000)
-    res = await getAuthorShareCode('http://47.106.222.216:18880/share_code/jxSign.json')
-  }
-  $.shareCodes = [...(res || []), ...$.shareCodes]
+  await requestAlgo();
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -74,10 +73,8 @@ if ($.isNode()) {
       if (!isLoginInfo[$.UserName]) continue
       if (JX_FIRST_RUNTASK === '5') {
         $.signhb_source = '5'
-        await requestAlgo();
       } else if (JX_FIRST_RUNTASK === '1000') {
         $.signhb_source = '1000'
-        await requestAlgo();
       }
       await signhb(1)
       await $.wait(500)
@@ -113,23 +110,19 @@ if ($.isNode()) {
         console.log(`开始运行喜豆任务`)
         $.taskName = '喜豆'
         $.signhb_source = '5'
-        await requestAlgo();
         await main()
         console.log(`\n开始运行红包任务`)
         $.taskName = '红包'
         $.signhb_source = '1000'
-        await requestAlgo();
         await main(false)
       } else if (JX_FIRST_RUNTASK === '1000') {
         console.log(`开始运行红包任务`)
         $.taskName = '红包'
         $.signhb_source = '1000'
-        await requestAlgo();
         await main()
         console.log(`\n开始运行喜豆任务`)
         $.taskName = '喜豆'
         $.signhb_source = '5'
-        await requestAlgo();
         await main(false)
       }
     }
@@ -535,39 +528,6 @@ function TotalBean() {
     })
   })
 }
-function getAuthorShareCode(url) {
-  return new Promise(resolve => {
-    const options = {
-      url: `${url}?${new Date()}`, "timeout": 10000, headers: {
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
-      }
-    };
-    if ($.isNode() && process.env.TG_PROXY_HOST && process.env.TG_PROXY_PORT) {
-      const tunnel = require("tunnel");
-      const agent = {
-        https: tunnel.httpsOverHttp({
-          proxy: {
-            host: process.env.TG_PROXY_HOST,
-            port: process.env.TG_PROXY_PORT * 1
-          }
-        })
-      }
-      Object.assign(options, { agent })
-    }
-    $.get(options, async (err, resp, data) => {
-      try {
-        if (err) {
-        } else {
-          if (data) data = JSON.parse(data)
-        }
-      } catch (e) {
-        // $.logErr(e, resp)
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
 function jsonParse(str) {
   if (typeof str == "string") {
     try {
@@ -607,11 +567,6 @@ Date.prototype.Format = function (fmt) {
 }
 
 async function requestAlgo() {
-  if ($.signhb_source === '5') {
-    $.appId = 10038;
-  } else {
-    $.appId = 10028;
-  }
   $.fingerprint = await generateFp();
   const options = {
     "url": `https://cactus.jd.com/request_algo?g_ty=ajax`,
@@ -630,7 +585,7 @@ async function requestAlgo() {
       'Accept-Language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7'
     },
     'body': JSON.stringify({
-      "version": "1.0",
+      "version": "3.0",
       "fp": $.fingerprint,
       "appId": $.appId.toString(),
       "timestamp": Date.now(),
@@ -693,7 +648,7 @@ function decrypt(time, stk, type, url) {
     const hash2 = $.CryptoJS.HmacSHA256(st, hash1.toString()).toString($.CryptoJS.enc.Hex);
     // console.log(`\nst:${st}`)
     // console.log(`h5st:${["".concat(timestamp.toString()), "".concat(fingerprint.toString()), "".concat($.appId.toString()), "".concat(token), "".concat(hash2)].join(";")}\n`)
-    return encodeURIComponent(["".concat(timestamp.toString()), "".concat($.fingerprint.toString()), "".concat($.appId.toString()), "".concat($.token), "".concat(hash2)].join(";"))
+    return encodeURIComponent(["".concat(timestamp.toString()), "".concat($.fingerprint.toString()), "".concat($.appId.toString()), "".concat($.token), "".concat(hash2), "".concat("3.0"), "".concat(time)].join(";"))
   } else {
     return '20210318144213808;8277529360925161;10001;tk01w952a1b73a8nU0luMGtBanZTHCgj0KFVwDa4n5pJ95T/5bxO/m54p4MtgVEwKNev1u/BUjrpWAUMZPW0Kz2RWP8v;86054c036fe3bf0991bd9a9da1a8d44dd130c6508602215e50bb1e385326779d'
   }
